@@ -30,6 +30,10 @@ output "vpc_id" {
   value = "${terraform_remote_state.info.output.vpc_id}"
 }
 
+output "monitoring_security_group" {
+  value = "${terraform_remote_state.info.output.monitoring_security_group}"
+}
+
 output "ssh_security_group" {
   value = "${terraform_remote_state.info.output.ssh_security_group}"
 }
@@ -40,6 +44,10 @@ output "internet_access_security_group" {
 
 output "shared_services_security_group" {
   value = "${terraform_remote_state.info.output.shared_services_security_group}"
+}
+
+output "instance_security_groups" {
+  value = "${terraform_remote_state.info.output.instance_security_groups}"
 }
 
 output "rds_mysql_parameter_group" {
