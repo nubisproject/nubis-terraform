@@ -8,7 +8,10 @@ variable "nubis_domain" {
   default = "nubis.allizom.org"
 }
 
-variable "ami" {
+variable "ami" {}
+
+variable "migrate" {
+  default = 1
 }
 
 variable "instance_type" {
@@ -24,7 +27,7 @@ variable "purpose" {
 }
 
 variable "technical_owner" {
-  default= "infra-aws@mozilla.com"
+  default = "infra-aws@mozilla.com"
 }
 
 variable "ssh_key_name" {
@@ -44,5 +47,33 @@ variable "min_instances" {
 }
 
 variable "security_group" {
+  default = ""
+}
+
+variable "nubis_version" {
+  default = ""
+}
+
+variable "wait_for_capacity_timeout" {
+  default = "10m"
+}
+
+variable "health_check_type" {
+  default = ""
+}
+
+variable "health_check_grace_period" {
+  default = "300"
+}
+
+variable "elb" {
+  default = ""
+}
+
+variable "instance_profile" {
+  default = ""
+}
+
+variable "role" {
   default = ""
 }
