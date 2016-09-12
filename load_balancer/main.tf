@@ -41,10 +41,6 @@ resource "aws_security_group" "load_balancer" {
     Backup         = "true"
     Shutdown       = "never"
   }
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_elb" "load_balancer" {
@@ -60,26 +56,13 @@ resource "aws_elb" "load_balancer" {
     "${aws_security_group.load_balancer.id}",
   ]
 
-  #access_logs {
-
-
-  #  bucket = "foo"
-
-
-  #  bucket_prefix = "bar"
-
-
-  #  interval = 60
-
-
-  #}
-
   listener {
     instance_port     = 80
     instance_protocol = "http"
     lb_port           = 80
     lb_protocol       = "http"
   }
+
   listener {
     instance_port      = 80
     instance_protocol  = "http"
@@ -87,6 +70,7 @@ resource "aws_elb" "load_balancer" {
     lb_protocol        = "https"
     ssl_certificate_id = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.region}.${var.account}.${var.nubis_domain}"
   }
+
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -94,10 +78,12 @@ resource "aws_elb" "load_balancer" {
     target              = "${var.health_check_target}"
     interval            = 30
   }
+
   cross_zone_load_balancing   = true
   idle_timeout                = 400
   connection_draining         = true
   connection_draining_timeout = 400
+
   tags = {
     Name           = "${var.service_name}-${var.environment}"
     Region         = "${var.region}"
