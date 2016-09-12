@@ -15,3 +15,7 @@ variable "service_name" {
 variable "technical_owner" {
   default = "infra-aws@mozilla.com"
 }
+
+variable "health_check_target" {
+  default = "HTTP:80/"
+}
