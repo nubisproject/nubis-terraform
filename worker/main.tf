@@ -62,11 +62,7 @@ resource "aws_launch_configuration" "launch_config" {
   }
 }
 
-# Careful, must also edit asg_elb in sync with this one, unfortunately
-
 resource "aws_autoscaling_group" "asg" {
-  # Create only if elb isn't set
-  count                = "${signum(length(var.elb)) + 1 % 2}"
   name                 = "${var.service_name}-${var.environment}-${var.region}-asg (LC ${aws_launch_configuration.launch_config.id})"
   desired_capacity     = "${var.desired_instances}"
   max_size             = "${(var.desired_instances * 2) + 1}"
@@ -79,78 +75,12 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = [
     "${split(",",module.info.private_subnets)}",
   ]
-
-  wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
-
-  tag {
-    key                 = "Name"
-    value               = "${var.service_name} (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.environment}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "ServiceName"
-    value               = "${var.service_name}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Region"
-    value               = "${var.region}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Environment"
-    value               = "${var.environment}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "TechnicalOwner"
-    value               = "${var.technical_owner}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Shutdown"
-    value               = "never"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Backup"
-    value               = "true"
-    propagate_at_launch = true
-  }
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-# XXX: Careful, must be mainly identical to the asg above
-resource "aws_autoscaling_group" "asg_elb" {
-  # create if elb is set
-  count                = "${signum(length(var.elb)) % 2}"
-  name                 = "${var.service_name}-${var.environment}-${var.region}-asg (LC ${aws_launch_configuration.launch_config.id})"
-  desired_capacity     = "${var.desired_instances}"
-  max_size             = "${(var.desired_instances * 2) + 1}"
-  min_size             = "${var.min_instances}"
-  launch_configuration = "${aws_launch_configuration.launch_config.id}"
-
-  health_check_grace_period = "${var.health_check_grace_period}"
-  health_check_type         = "${coalesce(var.health_check_type, "EC2")}"
-
-  vpc_zone_identifier = [
-    "${split(",",module.info.private_subnets)}",
-  ]
-
-  wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
 
   load_balancers = [
-    "${var.elb}",
+    "${compact(split(",",var.elb))}",
   ]
+
+  wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
 
   tag {
     key                 = "Name"

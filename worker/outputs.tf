@@ -12,5 +12,5 @@ output "role" {
 }
 
 output "autoscaling_group" {
-  value = "${coalesce(join(",", aws_autoscaling_group.asg.*.id), join(",", aws_autoscaling_group.asg_elb.*.id))}"
+  value = "${aws_autoscaling_group.asg.id}"
 }
