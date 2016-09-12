@@ -29,11 +29,12 @@ resource "aws_security_group" "extra" {
 }
 
 resource "template_file" "monitoring" {
-   template = "${ONE},${TWO}"
-   vars = {
-     ONE = "${coalesce(aws_security_group.extra.id, var.security_group)}"
-     TWO = "${module.info.monitoring_security_group}"
-   }
+  template = "${ONE},${TWO}"
+
+  vars = {
+    ONE = "${coalesce(aws_security_group.extra.id, var.security_group)}"
+    TWO = "${module.info.monitoring_security_group}"
+  }
 }
 
 resource "aws_launch_configuration" "launch_config" {
