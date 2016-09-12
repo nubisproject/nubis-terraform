@@ -41,6 +41,10 @@ resource "aws_security_group" "load_balancer" {
     Backup         = "true"
     Shutdown       = "never"
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_elb" "load_balancer" {
@@ -91,5 +95,9 @@ resource "aws_elb" "load_balancer" {
     TechnicalOwner = "${var.technical_owner}"
     Backup         = "true"
     Shutdown       = "never"
+  }
+
+  lifecycle {
+    create_before_destroy = true
   }
 }
