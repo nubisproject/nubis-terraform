@@ -8,7 +8,8 @@ variable "nubis_domain" {
   default = "nubis.allizom.org"
 }
 
-variable "ami" {}
+variable "ami" {
+}
 
 variable "migrate" {
   default = 1
@@ -76,4 +77,8 @@ variable "instance_profile" {
 
 variable "role" {
   default = ""
+}
+
+variable "monitoring" {
+  default = "0"
 }

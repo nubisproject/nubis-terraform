@@ -28,6 +28,14 @@ resource "aws_security_group" "extra" {
   }
 }
 
+resource "template_file" "monitoring" {
+   template = "${ONE},${TWO}"
+   vars = {
+     ONE = "${coalesce(aws_security_group.extra.id, var.security_group)}"
+     TWO = "${module.info.monitoring_security_group}"
+   }
+}
+
 resource "aws_launch_configuration" "launch_config" {
   name_prefix = "${var.service_name}-${var.environment}-${var.region}-"
 
@@ -42,7 +50,8 @@ resource "aws_launch_configuration" "launch_config" {
   # plus one more, just for us  
   security_groups = [
     "${split(",", module.info.instance_security_groups)}",
-    "${coalesce(aws_security_group.extra.*.id, var.security_group)}",
+    "${coalesce(aws_security_group.extra.id, var.security_group)}",
+    "${element(split(",",template_file.monitoring.rendered), var.monitoring)}",
   ]
 
   user_data = "${template_file.user_data.rendered}"
@@ -194,7 +203,7 @@ resource "aws_iam_instance_profile" "extra" {
   count = "${signum(length(var.instance_profile)) + 1 % 2}"
 
   name  = "${var.service_name}-${var.environment}-${var.region}-profile"
-  roles = ["${coalesce(var.role, aws_iam_role.extra.*.name)}"]
+  roles = ["${coalesce(var.role, aws_iam_role.extra.name)}"]
 
   lifecycle {
     create_before_destroy = true
