@@ -83,6 +83,16 @@ resource "aws_launch_configuration" "launch_config" {
   }
 }
 
+# Default health-check depends on if var.elb is set
+variable "health_check_type_map" {
+  type = "map"
+
+  default = {
+    "0" = "EC2"
+    "1" = "ELB"
+  }
+}
+
 resource "aws_autoscaling_group" "asg" {
   name                 = "${var.service_name}-${var.environment}-${var.region}-asg (LC ${aws_launch_configuration.launch_config.id})"
   desired_capacity     = "${var.desired_instances}"
@@ -91,7 +101,9 @@ resource "aws_autoscaling_group" "asg" {
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
 
   health_check_grace_period = "${var.health_check_grace_period}"
-  health_check_type         = "${coalesce(var.health_check_type, "EC2")}"
+
+  # Use the provided variable explicitely, otherwise, default depending on if we are using an ELB or not
+  health_check_type         = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
     "${split(",",module.info.private_subnets)}",
