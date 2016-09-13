@@ -15,7 +15,7 @@ resource "aws_security_group" "extra" {
   vpc_id = "${module.info.vpc_id}"
 
   tags = {
-    Name           = "${var.service_name}-${var.environment}"
+    Name           = "${var.service_name}-${var.environment}-${var.purpose}"
     Region         = "${var.region}"
     Environment    = "${var.environment}"
     TechnicalOwner = "${var.technical_owner}"
@@ -166,7 +166,7 @@ resource "aws_iam_instance_profile" "extra" {
   # Create only if instance_profile isn't set
   count = "${signum(length(var.instance_profile)) + 1 % 2}"
 
-  name  = "${var.service_name}-${var.environment}-${var.region}-profile"
+  name  = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
   roles = ["${coalesce(var.role, aws_iam_role.extra.name)}"]
 
   lifecycle {
@@ -178,7 +178,7 @@ resource "aws_iam_role" "extra" {
   # Create only if instance_profile isn't set and role isn't set
   count = "${(signum(length(var.instance_profile)) + 1 % 2) * ( signum(length(var.role)) + 1 % 2 ) }"
 
-  name = "${var.service_name}-${var.environment}-${var.region}-role"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-role"
 
   assume_role_policy = <<EOF
 {
