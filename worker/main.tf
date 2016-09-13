@@ -103,7 +103,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_grace_period = "${var.health_check_grace_period}"
 
   # Use the provided variable explicitely, otherwise, default depending on if we are using an ELB or not
-  health_check_type         = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
+  health_check_type = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
     "${split(",",module.info.private_subnets)}",
