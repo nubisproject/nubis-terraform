@@ -59,7 +59,7 @@ resource "template_file" "monitoring" {
 }
 
 resource "aws_launch_configuration" "launch_config" {
-  name_prefix = "${var.service_name}-${var.environment}-${var.region}-"
+  name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-"
 
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
@@ -94,7 +94,7 @@ variable "health_check_type_map" {
 }
 
 resource "aws_autoscaling_group" "asg" {
-  name                 = "${var.service_name}-${var.environment}-${var.region}-asg (LC ${aws_launch_configuration.launch_config.id})"
+  name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
   desired_capacity     = "${var.desired_instances}"
   max_size             = "${(var.desired_instances * 2) + 1}"
   min_size             = "${var.min_instances}"
