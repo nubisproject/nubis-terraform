@@ -68,7 +68,7 @@ resource "aws_db_instance" "database" {
   multi_az          = "${var.multi_az}"
 
   username = "${var.username}"
-  password = "${uuid()}"
+  password = "${var.password}"
 
   backup_retention_period = "${var.backup_retention_period}"
   apply_immediately       = true
@@ -80,11 +80,6 @@ resource "aws_db_instance" "database" {
   vpc_security_group_ids = [
     "${aws_security_group.database.id}",
   ]
-  lifecycle {
-    ignore_changes = [
-      "password",
-    ]
-  }
 }
 
 resource "aws_db_instance" "replica" {

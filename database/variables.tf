@@ -38,6 +38,10 @@ variable "name" {
   default = ""
 }
 
+variable "password" {
+  default = "provisioner_password"
+}
+
 variable "username" {
   default = "admin"
 }

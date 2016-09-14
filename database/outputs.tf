@@ -1,6 +1,7 @@
 output "password" {
   value = "${aws_db_instance.database.password}"
 }
+
 output "username" {
   value = "${aws_db_instance.database.username}"
 }
