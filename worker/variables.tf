@@ -82,10 +82,14 @@ variable "monitoring" {
   default = "0"
 }
 
+variable "scale_load_defaults" {
+  default = false
+}
+
 variable "scale_up_load" {
-  default = 0
+  default = ""
 }
 
 variable "scale_down_load" {
-  default = 0
+  default = ""
 }

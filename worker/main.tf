@@ -222,7 +222,7 @@ resource "template_file" "user_data" {
 }
 
 resource "aws_autoscaling_policy" "up" {
-  count                  = "${signum(var.scale_up_load)}"
+  count                  = "${signum(var.scale_load_defaults + signum(length(var.scale_up_load)))}"
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-asp"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
@@ -231,7 +231,7 @@ resource "aws_autoscaling_policy" "up" {
 }
 
 resource "aws_autoscaling_policy" "down" {
-  count                  = "${signum(var.scale_down_load)}"
+  count                  = "${signum(var.scale_load_defaults + signum(length(var.scale_down_load)))}"
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-asp"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
@@ -240,7 +240,7 @@ resource "aws_autoscaling_policy" "down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "up" {
-  count               = "${signum(var.scale_up_load)}"
+  count               = "${signum(var.scale_load_defaults + signum(length(var.scale_up_load)))}"
   alarm_name          = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
@@ -248,7 +248,7 @@ resource "aws_cloudwatch_metric_alarm" "up" {
   namespace           = "AWS/EC2"
   period              = "60"
   statistic           = "Average"
-  threshold           = "${var.scale_up_load}"
+  threshold           = "${coalesce(var.scale_up_load,50)}"
 
   dimensions {
     AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
@@ -259,7 +259,7 @@ resource "aws_cloudwatch_metric_alarm" "up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "down" {
-  count               = "${signum(var.scale_down_load)}"
+  count               = "${signum(var.scale_load_defaults + signum(length(var.scale_down_load)))}"
   alarm_name          = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-alarm"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = "2"
@@ -267,7 +267,7 @@ resource "aws_cloudwatch_metric_alarm" "down" {
   namespace           = "AWS/EC2"
   period              = "60"
   statistic           = "Average"
-  threshold           = "${var.scale_down_load}"
+  threshold           = "${coalesce(var.scale_down_load,20)}"
 
   dimensions {
     AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
