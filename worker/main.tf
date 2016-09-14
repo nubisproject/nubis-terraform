@@ -95,8 +95,7 @@ variable "health_check_type_map" {
 
 resource "aws_autoscaling_group" "asg" {
   name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
-  desired_capacity     = "${var.desired_instances}"
-  max_size             = "${(var.desired_instances * 2) + 1}"
+  max_size              = "${coalesce(var.max_instances, 1+4*var.min_instances )}"
   min_size             = "${var.min_instances}"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
 
@@ -221,3 +220,56 @@ resource "template_file" "user_data" {
     create_before_destroy = true
   }
 }
+
+resource "aws_autoscaling_policy" "up" {
+    count = "${signum(var.scale_up_load)}"
+    name = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-asp"
+    scaling_adjustment = 1
+    adjustment_type = "ChangeInCapacity"
+    cooldown = 300
+    autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
+}
+
+resource "aws_autoscaling_policy" "down" {
+    count = "${signum(var.scale_down_load)}"
+    name = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-asp"
+    scaling_adjustment = -1
+    adjustment_type = "ChangeInCapacity"
+    cooldown = 300
+    autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
+}
+
+resource "aws_cloudwatch_metric_alarm" "up" {
+    count = "${signum(var.scale_up_load)}"
+    alarm_name = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-alarm"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
+    evaluation_periods = "2"
+    metric_name = "CPUUtilization"
+    namespace = "AWS/EC2"
+    period = "60"
+    statistic = "Average"
+    threshold = "${var.scale_up_load}"
+    dimensions {
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
+    }
+    alarm_description = "This metric monitor ec2 cpu utilization"
+    alarm_actions = ["${aws_autoscaling_policy.up.arn}"]
+}
+
+resource "aws_cloudwatch_metric_alarm" "down" {
+    count = "${signum(var.scale_down_load)}"
+    alarm_name = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-alarm"
+    comparison_operator = "LessThanOrEqualToThreshold"
+    evaluation_periods = "2"
+    metric_name = "CPUUtilization"
+    namespace = "AWS/EC2"
+    period = "60"
+    statistic = "Average"
+    threshold = "${var.scale_down_load}"
+    dimensions {
+        AutoScalingGroupName = "${aws_autoscaling_group.asg.name}"
+    }
+    alarm_description = "This metric monitor ec2 cpu utilization"
+    alarm_actions = ["${aws_autoscaling_policy.down.arn}"]
+}
+

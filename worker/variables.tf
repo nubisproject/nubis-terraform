@@ -38,12 +38,12 @@ variable "consul_token" {
   default = "anonymous"
 }
 
-variable "desired_instances" {
+variable "min_instances" {
   default = 1
 }
 
-variable "min_instances" {
-  default = 1
+variable "max_instances" {
+  default = ""
 }
 
 variable "security_group" {
@@ -80,4 +80,12 @@ variable "role" {
 
 variable "monitoring" {
   default = "0"
+}
+
+variable "scale_up_load" {
+  default = 0
+}
+
+variable "scale_down_load" {
+  default = 0
 }
