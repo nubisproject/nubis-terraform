@@ -226,7 +226,7 @@ resource "aws_autoscaling_policy" "up" {
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-asp"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300
+  cooldown               = 60
   autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
 }
 
@@ -235,7 +235,7 @@ resource "aws_autoscaling_policy" "down" {
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-asp"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
-  cooldown               = 300
+  cooldown               = 60
   autoscaling_group_name = "${aws_autoscaling_group.asg.name}"
 }
 
