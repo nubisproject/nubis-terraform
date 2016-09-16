@@ -64,7 +64,9 @@ resource "aws_db_instance" "database" {
   allocated_storage = "${var.allocated_storage}"
   engine            = "${var.engine}"
   instance_class    = "${var.instance_class}"
-  name              = "${coalesce(var.name, var.service_name)}"
+
+  # Remove unsafe characters
+  name              = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9]/","")}"
   multi_az          = "${var.multi_az}"
 
   username = "${var.username}"
