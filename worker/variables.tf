@@ -34,6 +34,10 @@ variable "ssh_key_name" {
   default = "nubis"
 }
 
+variable "ssh_key_file" {
+  default = ""
+}
+
 variable "consul_token" {
   default = "anonymous"
 }

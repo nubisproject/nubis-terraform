@@ -276,3 +276,9 @@ resource "aws_cloudwatch_metric_alarm" "down" {
   alarm_description = "This metric monitor ec2 cpu utilization"
   alarm_actions     = ["${aws_autoscaling_policy.down.arn}"]
 }
+
+resource "aws_key_pair" "ssh" {
+  count      = "${signum(length(var.ssh_key_file))}"
+  public_key = "${file(var.ssh_key_file)}"
+  key_name   = "${var.ssh_key_name}"
+}
