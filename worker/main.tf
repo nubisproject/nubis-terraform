@@ -63,7 +63,7 @@ resource "aws_launch_configuration" "launch_config" {
 
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
-  key_name      = "${var.ssh_key_name}"
+  key_name      = "${coalesce(var.ssh_key_name, "nubis")}"
 
   # IAM Role (can be empty)
   iam_instance_profile = "${coalesce(var.instance_profile, aws_iam_instance_profile.extra.name)}"
