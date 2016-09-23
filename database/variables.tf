@@ -39,7 +39,7 @@ variable "name" {
 }
 
 variable "password" {
-  default = "provisioner_password"
+  default = ""
 }
 
 variable "username" {

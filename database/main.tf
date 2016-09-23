@@ -70,7 +70,7 @@ resource "aws_db_instance" "database" {
   multi_az          = "${var.multi_az}"
 
   username = "${var.username}"
-  password = "${var.password}"
+  password = "${coalesce(var.password,template_file.password.rendered)}"
 
   backup_retention_period = "${var.backup_retention_period}"
   apply_immediately       = true
@@ -89,4 +89,17 @@ resource "aws_db_instance" "replica" {
   replicate_source_db = "${aws_db_instance.database.id}"
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
+}
+
+# TF 0.6 limitation
+# Used as a stable random-number generator since we don't have random provider yet
+resource "tls_private_key" "random" {
+    algorithm = "ECDSA"
+}
+
+resource "template_file" "password" {
+  template = "${password32}"
+  vars = {
+    password32 = "${replace(tls_private_key.random.id,"/^(.{32}).*/","$1")}"
+  }
 }
