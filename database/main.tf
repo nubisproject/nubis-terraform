@@ -66,6 +66,7 @@ resource "aws_db_instance" "database" {
   instance_class    = "${var.instance_class}"
 
   # Remove unsafe characters
+  identifier        = "${var.service_name}-${var.environment}"
   name              = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9]/","")}"
   multi_az          = "${var.multi_az}"
 
@@ -82,13 +83,28 @@ resource "aws_db_instance" "database" {
   vpc_security_group_ids = [
     "${aws_security_group.database.id}",
   ]
+
+  tags {
+    Region         = "${var.region}"
+    Environment    = "${var.environment}"
+    TechnicalOwner = "${var.technical_owner}"
+  }
 }
 
 resource "aws_db_instance" "replica" {
   count               = "${var.replica_count}"
+
+  identifier        = "${var.service_name}-${var.environment}-slave-${count.index}"
+
   replicate_source_db = "${aws_db_instance.database.id}"
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
+
+  tags {
+    Region         = "${var.region}"
+    Environment    = "${var.environment}"
+    TechnicalOwner = "${var.technical_owner}"
+  }
 }
 
 # TF 0.6 limitation
