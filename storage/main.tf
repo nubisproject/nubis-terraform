@@ -5,6 +5,22 @@ module "info" {
   account     = "${var.account}"
 }
 
+# Discover Consul settings
+module "consul" {
+  source       = "github.com/nubisproject/nubis-terraform//consul?ref=master"
+  region       = "${var.region}"
+  environment  = "${var.environment}"
+  account      = "${var.account}"
+  service_name = "${var.service_name}"
+}
+
+# Configure our Consul provider, module can't do it for us
+provider "consul" {
+  address    = "${module.consul.address}"
+  scheme     = "${module.consul.scheme}"
+  datacenter = "${module.consul.datacenter}"
+}
+
 provider "aws" {
   region = "${var.region}"
 }
@@ -55,5 +71,15 @@ resource "aws_security_group" "storage" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+
+resource "consul_keys" "config" {
+  key {
+    name   = "fsid"
+    path   = "${module.consul.config_prefix}/storage/${var.storage_name}/fsid"
+    value  = "${aws_efs_file_system.storage.id}"
+    delete = true
   }
 }

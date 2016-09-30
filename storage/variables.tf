@@ -4,9 +4,8 @@ variable "region" {}
 
 variable "environment" {}
 
-variable "service_name" {
-  default = "nubis"
-}
+variable "service_name" { }
+variable "storage_name" { }
 
 variable "technical_owner" {
   default = "infra-aws@mozilla.com"
