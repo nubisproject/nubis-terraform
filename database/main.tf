@@ -66,9 +66,9 @@ resource "aws_db_instance" "database" {
   instance_class    = "${var.instance_class}"
 
   # Remove unsafe characters
-  identifier        = "${var.service_name}-${var.environment}"
-  name              = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9]/","")}"
-  multi_az          = "${var.multi_az}"
+  identifier = "${var.service_name}-${var.environment}"
+  name       = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9]/","")}"
+  multi_az   = "${var.multi_az}"
 
   username = "${var.username}"
   password = "${coalesce(var.password,template_file.password.rendered)}"
@@ -83,7 +83,6 @@ resource "aws_db_instance" "database" {
   vpc_security_group_ids = [
     "${aws_security_group.database.id}",
   ]
-
   tags {
     Region         = "${var.region}"
     Environment    = "${var.environment}"
@@ -92,9 +91,9 @@ resource "aws_db_instance" "database" {
 }
 
 resource "aws_db_instance" "replica" {
-  count               = "${var.replica_count}"
+  count = "${var.replica_count}"
 
-  identifier        = "${var.service_name}-${var.environment}-slave-${count.index}"
+  identifier = "${var.service_name}-${var.environment}-slave-${count.index}"
 
   replicate_source_db = "${aws_db_instance.database.id}"
   instance_class      = "${var.instance_class}"
@@ -110,11 +109,12 @@ resource "aws_db_instance" "replica" {
 # TF 0.6 limitation
 # Used as a stable random-number generator since we don't have random provider yet
 resource "tls_private_key" "random" {
-    algorithm = "ECDSA"
+  algorithm = "ECDSA"
 }
 
 resource "template_file" "password" {
   template = "${password32}"
+
   vars = {
     password32 = "${replace(tls_private_key.random.id,"/^(.{32}).*/","$1")}"
   }

@@ -74,7 +74,6 @@ resource "aws_security_group" "storage" {
   }
 }
 
-
 resource "consul_keys" "config" {
   key {
     name   = "fsid"
