@@ -77,7 +77,7 @@ resource "aws_security_group" "storage" {
 resource "consul_keys" "config" {
   key {
     name   = "fsid"
-    path   = "${module.consul.config_prefix}/storage/${var.storage_name}/fsid"
+    path   = "${module.consul.config_prefix}/storage/${coalesce(var.storage_name,var.service_name)}/fsid"
     value  = "${aws_efs_file_system.storage.id}"
     delete = true
   }

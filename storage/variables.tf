@@ -6,7 +6,9 @@ variable "environment" {}
 
 variable "service_name" {}
 
-variable "storage_name" {}
+variable "storage_name" {
+  default = ""
+}
 
 variable "technical_owner" {
   default = "infra-aws@mozilla.com"
