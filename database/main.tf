@@ -65,8 +65,9 @@ resource "aws_db_instance" "database" {
   engine            = "${var.engine}"
   instance_class    = "${var.instance_class}"
 
-  # Remove unsafe characters
   identifier = "${var.service_name}-${var.environment}"
+
+  # Remove unsafe characters
   name       = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9]/","")}"
   multi_az   = "${var.multi_az}"
 
