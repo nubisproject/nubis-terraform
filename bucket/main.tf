@@ -15,6 +15,9 @@ resource "aws_s3_bucket" "bucket" {
 
   acl = "private"
 
+  # Allow destruction of non-empty buckets
+  force_destroy = true
+
   versioning {
     enabled = true
   }
