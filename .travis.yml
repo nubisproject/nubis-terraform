@@ -1,6 +1,6 @@
 language: go
 before_install:
-- go get go get gopkg.in/hashicorp/terraform.v1
+- go get gopkg.in/hashicorp/terraform.v1
 script:
 - "for d in */; do echo $d; ( cd $d && terraform validate ); done"
 matrix:
