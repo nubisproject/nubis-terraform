@@ -5,7 +5,7 @@ before_install:
 - unzip terraform.zip -d $HOME/bin
 - rm -f terraform.zip
 script:
-- for d in */; do echo "$d: "; terraform validate $d; done
+- 'for d in */; do echo "$d: "; terraform validate $d; done'
 matrix:
   fast_finish: true
 notifications:
