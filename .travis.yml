@@ -1,6 +1,8 @@
 language: go
 before_install:
-- go get gopkg.in/hashicorp/terraform.v1
+  - curl -fSL "https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip" -o terraform.zip
+  - unzip terraform.zip -d $HOME/bin
+  - rm -f terraform.zip
 script:
 - "for d in */; do echo $d; ( cd $d && terraform validate ); done"
 matrix:
