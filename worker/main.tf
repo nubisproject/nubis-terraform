@@ -113,6 +113,7 @@ resource "aws_autoscaling_group" "asg" {
   ]
 
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
+  wait_for_elb_capacity = "${signum(length(var.elb)) * var.min_instances}"
 
   tag {
     key                 = "Name"
