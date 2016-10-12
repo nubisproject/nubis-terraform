@@ -1,0 +1,13 @@
+language: generic
+before_install:
+- curl -fSL "https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip"
+  -o terraform.zip
+- unzip terraform.zip -d $HOME/bin
+- rm -f terraform.zip
+script:
+- 'for d in */; do echo "$d: "; terraform validate $d; done'
+matrix:
+  fast_finish: true
+notifications:
+  slack:
+    secure: MmzFF/aX9V64HTS5Rkntg/b8iUpAeSO3T26pKiJrAmDjXy6W2rg2MdP3SsQh+S026l9QA+FrSNIiE0aDsHXZRrjhHASvM/5rEIlCH8JTwWVB3kk3p/lDtUcoK2vFs94jzxbJuwae9oFDZ6DvJffF8ugN1FWHlXNY1lTLqzL+Dmr6YHQZf01DYebnEs9TDNp3UaIqrv1IR0mKiSNsHVgSPo1yeMOULtI3lnGQNYRe98X4IuEfwrpG3VD9tX/lff4sHOOoJV+cswdr9pvxjtZTnEjwb+D8dFjlKWFJN687BXMKxeyhznMGirec7NLFB8eSbrDge/cM/2zQnnNehzkwC1QsXXzHSgn6Hs5+qdPJxUPGstqlsLGhb76RGCv3GbCsfWaIXRpO/xIgqb3mQu0bD23FFoVt8GvLDBL7XfXJcerFnY+z2QysuUrT5d/VYrhSaEfhxdi3NJ1AQKurX9izpDxDS+RoNSvIiVTy3xjj974bXtBdwFBR+nH+m/tAweeYkIDcbw768V/tWiasbEmeoeLtTqcWo2SKsXulhyX+/t1Zw1vTInNdRoCNzSw+zmP3PlI/zO7n9BzA3ghZ1pbh/4H3h9vTs8I055QkQmdQcXfrF4XATIwmruhkVBqId49suRj/rTlqpx5XvLxEfEnkRh6Ze1EohOByq9cNmNF4oME=
