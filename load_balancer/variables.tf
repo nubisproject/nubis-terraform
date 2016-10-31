@@ -19,3 +19,7 @@ variable "technical_owner" {
 variable "health_check_target" {
   default = "HTTP:80/"
 }
+
+variable "ssl_cert_name_prefix" {
+  default = ""
+}
