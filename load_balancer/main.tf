@@ -47,7 +47,17 @@ resource "aws_security_group" "load_balancer" {
   }
 }
 
+resource "template_file" "ssl_cert_id" {
+  template = "${ONE},${TWO}"
+
+  vars = {
+    ONE = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.region}.${var.account}.${var.nubis_domain}"
+    TWO = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.ssl_cert_name_prefix}-${var.environment}"
+  }
+}
+
 resource "aws_elb" "load_balancer" {
+  # XXX: 32-character limit needs fixing
   name = "${var.service_name}-${var.environment}-${var.region}-elb"
 
   subnets = [
@@ -72,7 +82,7 @@ resource "aws_elb" "load_balancer" {
     instance_protocol  = "http"
     lb_port            = 443
     lb_protocol        = "https"
-    ssl_certificate_id = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.region}.${var.account}.${var.nubis_domain}"
+    ssl_certificate_id = "${element(split(",",template_file.ssl_cert_id.rendered), signum(length(var.ssl_cert_name_prefix)))}"
   }
 
   health_check {
