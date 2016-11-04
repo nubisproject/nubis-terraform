@@ -98,14 +98,10 @@ variable "scale_down_load" {
   default = ""
 }
 
-variable "global_admins" {
+variable "nubis_sudo_groups" {
   default = "nubis_global_admins"
 }
 
-variable "sudo_users" {
-  default = ""
-}
-
-variable "users" {
+variable "nubis_user_groups" {
   default = ""
 }
