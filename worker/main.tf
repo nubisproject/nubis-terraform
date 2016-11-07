@@ -215,6 +215,8 @@ resource "template_file" "user_data" {
     NUBIS_ACCOUNT     = "${var.account}"
     NUBIS_MIGRATE     = "${var.migrate}"
     NUBIS_STACK       = "${var.service_name}-${var.environment}"
+    NUBIS_SUDO_GROUPS = "${var.nubis_sudo_groups}"
+    NUBIS_USER_GROUPS = "${var.nubis_user_groups}"
   }
 
   lifecycle {
