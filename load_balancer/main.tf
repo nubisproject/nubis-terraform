@@ -58,7 +58,7 @@ resource "template_file" "ssl_cert_id" {
 
 resource "aws_elb" "load_balancer" {
   # XXX: 32-character limit needs fixing
-  name = "${var.service_name}-${var.environment}-${var.region}-elb"
+  name = "${var.service_name}-${var.environment}"
 
   subnets = [
     "${split(",", module.info.public_subnets)}",
