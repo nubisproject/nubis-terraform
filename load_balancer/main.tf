@@ -94,9 +94,9 @@ resource "aws_elb" "load_balancer" {
   }
 
   cross_zone_load_balancing   = true
-  idle_timeout                = 400
+  idle_timeout                = 60
   connection_draining         = true
-  connection_draining_timeout = 400
+  connection_draining_timeout = 60
 
   tags = {
     Name           = "${var.service_name}-${var.environment}"
