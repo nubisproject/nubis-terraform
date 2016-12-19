@@ -1,5 +1,5 @@
 output "address" {
-  value = "dualstack.${aws_elb.load_balancer.dns_name}"
+  value = "${aws_elb.load_balancer.dns_name}"
 }
 
 output "ipv4_address" {

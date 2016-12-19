@@ -115,6 +115,17 @@ resource "aws_autoscaling_group" "asg" {
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
   wait_for_elb_capacity = "${signum(length(var.elb)) * var.min_instances}"
 
+  enabled_metrics = [
+    "GroupMinSize",
+    "GroupMaxSize",
+    "GroupDesiredCapacity",
+    "GroupInServiceInstances",
+    "GroupPendingInstances",
+    "GroupStandbyInstances",
+    "GroupTerminatingInstances",
+    "GroupTotalInstances",
+  ]
+
   tag {
     key                 = "Name"
     value               = "${var.service_name} (${var.purpose}) (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.environment}"
@@ -215,6 +226,8 @@ resource "template_file" "user_data" {
     NUBIS_ACCOUNT     = "${var.account}"
     NUBIS_MIGRATE     = "${var.migrate}"
     NUBIS_STACK       = "${var.service_name}-${var.environment}"
+    NUBIS_SUDO_GROUPS = "${var.nubis_sudo_groups}"
+    NUBIS_USER_GROUPS = "${var.nubis_user_groups}"
   }
 
   lifecycle {
