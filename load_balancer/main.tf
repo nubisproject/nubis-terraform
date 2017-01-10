@@ -86,9 +86,9 @@ resource "aws_elb" "load_balancer" {
   }
 
   health_check {
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 3
+    healthy_threshold   = "${var.health_check_healthy_threshold}"
+    unhealthy_threshold = "${var.health_check_unhealthy_threshold}"
+    timeout             = "${var.health_check_timeout}"
     target              = "${var.health_check_target}"
     interval            = 30
   }

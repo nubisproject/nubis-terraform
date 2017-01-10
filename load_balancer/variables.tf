@@ -20,6 +20,18 @@ variable "health_check_target" {
   default = "HTTP:80/"
 }
 
+variable "health_check_timeout" {
+  default = "3"
+}
+
+variable "health_check_healthy_treshold" {
+  default = "2"
+}
+
+variable "health_check_unhealthy_treshold" {
+  default = "2"
+}
+
 variable "ssl_cert_name_prefix" {
   default = ""
 }
