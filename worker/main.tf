@@ -95,7 +95,7 @@ variable "health_check_type_map" {
 
 resource "aws_autoscaling_group" "asg" {
   name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
-  max_size             = "${coalesce(var.max_instances, 1+4*var.min_instances )}"
+  max_size             = "${coalesce(var.max_instances, 1 + (4*var.min_instances) )}"
   min_size             = "${var.min_instances}"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
 
