@@ -12,7 +12,8 @@ provider "aws" {
 resource "aws_route53_record" "primary" {
   count   = "${1 - ( var.ipv4_alias * var.ipv6_alias )}"
   zone_id = "${module.info.hosted_zone_id}"
-  name    = "${var.prefix}.${var.service_name}-${var.environment}.${var.environment}"
+  name    = "${coalesce(var.name, "${var.prefix}.${var.service_name}-${var.environment}")}.${var.environment}"
+
   type    = "${var.type}"
   ttl     = "${var.ttl}"
   records = ["${split(",",var.target)}"]
@@ -22,7 +23,7 @@ resource "aws_route53_record" "ipv4_alias" {
   count   = "${var.ipv4_alias}"
   zone_id = "${module.info.hosted_zone_id}"
 
-  name = "${var.prefix}.${var.service_name}-${var.environment}.${var.environment}"
+  name = "${coalesce(var.name, "${var.prefix}.${var.service_name}-${var.environment}")}.${var.environment}"
   type = "A"
 
   alias {
@@ -36,7 +37,7 @@ resource "aws_route53_record" "ipv6_alias" {
   count   = "${var.ipv6_alias}"
   zone_id = "${module.info.hosted_zone_id}"
 
-  name = "${var.prefix}.${var.service_name}-${var.environment}.${var.environment}"
+  name = "${coalesce(var.name, "${var.prefix}.${var.service_name}-${var.environment}")}.${var.environment}"
   type = "AAAA"
 
   alias {

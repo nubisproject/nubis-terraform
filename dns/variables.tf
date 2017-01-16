@@ -56,3 +56,7 @@ variable "prefix" {
 variable "alias_zone_id" {
   default = ""
 }
+
+variable "name" {
+  default = ""
+}
