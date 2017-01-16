@@ -36,7 +36,7 @@ variable "ssl_cert_name_prefix" {
   default = ""
 }
 
-variable "client_ptorocol" {
+variable "client_protocol" {
   default = "http"
 }
 
