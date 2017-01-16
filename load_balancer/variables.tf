@@ -24,11 +24,11 @@ variable "health_check_timeout" {
   default = "3"
 }
 
-variable "health_check_healthy_treshold" {
+variable "health_check_healthy_threshold" {
   default = "2"
 }
 
-variable "health_check_unhealthy_treshold" {
+variable "health_check_unhealthy_threshold" {
   default = "2"
 }
 
