@@ -36,8 +36,16 @@ variable "ssl_cert_name_prefix" {
   default = ""
 }
 
-variable "client_protocol" {
+variable "backend_protocol" {
   default = "http"
+}
+
+variable "backend_port_http" {
+  default = "80"
+}
+
+variable "backend_port_https" {
+  default = "80"
 }
 
 variable "protocol_http" {
