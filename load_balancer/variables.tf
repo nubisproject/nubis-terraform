@@ -35,3 +35,15 @@ variable "health_check_unhealthy_treshold" {
 variable "ssl_cert_name_prefix" {
   default = ""
 }
+
+variable "client_ptorocol" {
+  default = "http"
+}
+
+variable "protocol_http" {
+  default = "http"
+}
+
+variable "protocol_https" {
+  default = "https"
+}
