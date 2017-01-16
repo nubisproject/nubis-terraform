@@ -36,6 +36,10 @@ variable "ssl_cert_name_prefix" {
   default = ""
 }
 
+variable "no_ssl_cert" {
+  default = "0"
+}
+
 variable "backend_protocol" {
   default = "http"
 }
