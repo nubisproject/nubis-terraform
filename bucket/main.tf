@@ -31,8 +31,9 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_iam_role_policy" "bucket" {
-  name = "${var.service_name}-${var.environment}-${var.purpose}-bucket-policy"
-  role = "${var.role}"
+  count = "${var.role_cnt}"
+  name  = "${var.service_name}-${var.environment}-${var.purpose}-bucket-policy"
+  role  = "${element(split(",",var.role), count.index)}"
 
   policy = <<EOF
 {
@@ -72,10 +73,10 @@ resource "tls_private_key" "random" {
 }
 
 resource "template_file" "random" {
-  template = "${bucket}-${random40}"
+  template = "${bucket}-${random}"
 
   vars = {
-    random40 = "${replace(tls_private_key.random.id,"/^(.{40}).*/","$1")}"
+    random = "${tls_private_key.random.id}"
     bucket   = "${var.service_name}-${var.environment}-${var.purpose}"
   }
 }

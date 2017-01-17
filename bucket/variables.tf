@@ -13,3 +13,8 @@ variable "technical_owner" {
 variable "purpose" {}
 
 variable "role" {}
+
+# Must be correctly set, hard-coded, when using multiple roles
+variable "role_cnt" {
+  default = 1
+}

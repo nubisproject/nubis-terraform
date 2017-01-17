@@ -96,6 +96,8 @@ resource "aws_db_instance" "replica" {
 
   identifier = "${var.service_name}-${var.environment}-slave-${count.index}"
 
+  multi_az   = "${var.multi_az}"
+
   replicate_source_db = "${aws_db_instance.database.id}"
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
