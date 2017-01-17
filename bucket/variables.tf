@@ -13,3 +13,7 @@ variable "technical_owner" {
 variable "purpose" {}
 
 variable "role" {}
+
+variable "role_cnt" {
+  default = 1
+}
