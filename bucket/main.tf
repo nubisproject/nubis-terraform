@@ -31,8 +31,9 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_iam_role_policy" "bucket" {
-  name = "${var.service_name}-${var.environment}-${var.purpose}-bucket-policy"
-  role = "${var.role}"
+  count = "${var.role_cnt}"
+  name  = "${var.service_name}-${var.environment}-${var.purpose}-bucket-policy"
+  role  = "${element(split(",",var.role), count.index)}"
 
   policy = <<EOF
 {
