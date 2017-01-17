@@ -72,10 +72,10 @@ resource "tls_private_key" "random" {
 }
 
 resource "template_file" "random" {
-  template = "${bucket}-${random40}"
+  template = "${bucket}-${random}"
 
   vars = {
-    random40 = "${replace(tls_private_key.random.id,"/^(.{40}).*/","$1")}"
+    random = "${tls_private_key.random.id}"
     bucket   = "${var.service_name}-${var.environment}-${var.purpose}"
   }
 }
