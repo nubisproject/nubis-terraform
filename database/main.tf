@@ -31,6 +31,13 @@ resource "aws_security_group" "database" {
     ]
   }
 
+  ingress {
+    self      = true
+    from_port = 3306
+    to_port   = 3306
+    protocol  = "tcp"
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
