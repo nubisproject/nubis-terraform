@@ -75,8 +75,8 @@ resource "aws_db_instance" "database" {
   identifier = "${var.service_name}-${var.environment}"
 
   # Remove unsafe characters
-  name       = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9_]/","")}"
-  multi_az   = "${var.multi_az}"
+  name     = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9_]/","")}"
+  multi_az = "${var.multi_az}"
 
   username = "${var.username}"
   password = "${coalesce(var.password,template_file.password.rendered)}"
@@ -85,6 +85,7 @@ resource "aws_db_instance" "database" {
   apply_immediately       = true
   storage_type            = "${var.storage_type}"
   db_subnet_group_name    = "${aws_db_subnet_group.database.name}"
+  parameter_group_name    = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
 
   #  parameter_group_name = "default.mysql5.6"
 
@@ -106,6 +107,9 @@ resource "aws_db_instance" "replica" {
   replicate_source_db = "${aws_db_instance.database.id}"
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
+
+  parameter_group_name    = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
+  apply_immediately    = true
 
   tags {
     Region         = "${var.region}"

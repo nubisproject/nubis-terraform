@@ -57,3 +57,7 @@ variable "storage_type" {
 variable "multi_az" {
   default = false
 }
+
+variable "parameter_group_name" {
+  default = ""
+}
