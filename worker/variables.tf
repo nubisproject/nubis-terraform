@@ -105,3 +105,7 @@ variable "nubis_sudo_groups" {
 variable "nubis_user_groups" {
   default = ""
 }
+
+variable "root_storage_size" {
+  default = "0"
+}

@@ -85,6 +85,10 @@ resource "aws_launch_configuration" "launch_config" {
 
   user_data = "${template_file.user_data.rendered}"
 
+  root_block_device = {
+    volume_size = "${root_storage_size}"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
