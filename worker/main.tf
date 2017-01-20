@@ -87,6 +87,7 @@ resource "aws_launch_configuration" "launch_config" {
 
   root_block_device = {
     volume_size = "${var.root_storage_size}"
+    delete_on_termination = true
   }
 
   lifecycle {
