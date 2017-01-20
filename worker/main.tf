@@ -86,7 +86,7 @@ resource "aws_launch_configuration" "launch_config" {
   user_data = "${template_file.user_data.rendered}"
 
   root_block_device = {
-    volume_size = "${root_storage_size}"
+    volume_size = "${var.root_storage_size}"
   }
 
   lifecycle {
