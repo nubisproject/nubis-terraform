@@ -53,3 +53,7 @@ output "instance_security_groups" {
 output "rds_mysql_parameter_group" {
   value = "${terraform_remote_state.info.output.rds_mysql_parameter_group}"
 }
+
+output "access_logging_bucket" {
+  value = "${terraform_remote_state.info.output.access_logging_bucket}"
+}
