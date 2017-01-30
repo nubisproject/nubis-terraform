@@ -94,6 +94,11 @@ resource "aws_elb" "load_balancer" {
     interval            = 30
   }
 
+  access_logs {
+    bucket = "${module.info.access_logging_bucket}"
+    interval = 60
+  }
+
   cross_zone_load_balancing   = true
   idle_timeout                = 60
   connection_draining         = true
