@@ -95,7 +95,7 @@ resource "aws_elb" "load_balancer" {
   }
 
   access_logs {
-    bucket = "${module.info.access_logging_bucket}"
+    bucket   = "${module.info.access_logging_bucket}"
     interval = 60
   }
 

@@ -77,6 +77,6 @@ resource "template_file" "random" {
 
   vars = {
     random = "${tls_private_key.random.id}"
-    bucket   = "${var.service_name}-${var.environment}-${var.purpose}"
+    bucket = "${var.service_name}-${var.environment}-${var.purpose}"
   }
 }

@@ -86,7 +86,7 @@ resource "aws_launch_configuration" "launch_config" {
   user_data = "${template_file.user_data.rendered}"
 
   root_block_device = {
-    volume_size = "${var.root_storage_size}"
+    volume_size           = "${var.root_storage_size}"
     delete_on_termination = true
   }
 
@@ -125,7 +125,7 @@ resource "aws_autoscaling_group" "asg" {
   ]
 
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
-  wait_for_elb_capacity = "${signum(length(var.elb)) * var.min_instances}"
+  wait_for_elb_capacity     = "${signum(length(var.elb)) * var.min_instances}"
 
   enabled_metrics = [
     "GroupMinSize",

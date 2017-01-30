@@ -108,7 +108,7 @@ resource "aws_db_instance" "replica" {
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
 
-  parameter_group_name    = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
+  parameter_group_name = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
   apply_immediately    = true
 
   tags {
