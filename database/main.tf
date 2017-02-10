@@ -79,7 +79,7 @@ resource "aws_db_instance" "database" {
   multi_az = "${var.multi_az}"
 
   username = "${var.username}"
-  password = "${coalesce(var.password,template_file.password.rendered)}"
+  password = "${coalesce(var.password,data.template_file.password.rendered)}"
 
   backup_retention_period = "${var.backup_retention_period}"
   apply_immediately       = true
@@ -124,8 +124,8 @@ resource "tls_private_key" "random" {
   algorithm = "ECDSA"
 }
 
-resource "template_file" "password" {
-  template = "${password32}"
+data "template_file" "password" {
+  template = "$${password32}"
 
   vars = {
     password32 = "${replace(tls_private_key.random.id,"/^(.{32}).*/","$1")}"

@@ -56,8 +56,8 @@ resource "aws_security_group" "extra" {
   }
 }
 
-resource "template_file" "monitoring" {
-  template = "${ONE},${TWO}"
+data "template_file" "monitoring" {
+  template = "$${ONE},$${TWO}"
 
   vars = {
     ONE = "${coalesce(aws_security_group.extra.id, var.security_group)}"
@@ -80,10 +80,10 @@ resource "aws_launch_configuration" "launch_config" {
   security_groups = [
     "${split(",", module.info.instance_security_groups)}",
     "${coalesce(aws_security_group.extra.id, var.security_group)}",
-    "${element(split(",",template_file.monitoring.rendered), var.monitoring)}",
+    "${element(split(",",data.template_file.monitoring.rendered), var.monitoring)}",
   ]
 
-  user_data = "${template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data.rendered}"
 
   root_block_device = {
     volume_size           = "${var.root_storage_size}"
@@ -220,7 +220,7 @@ EOF
   }
 }
 
-resource "template_file" "user_data" {
+data "template_file" "user_data" {
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
@@ -236,10 +236,6 @@ resource "template_file" "user_data" {
     NUBIS_STACK       = "${var.service_name}-${var.environment}"
     NUBIS_SUDO_GROUPS = "${var.nubis_sudo_groups}"
     NUBIS_USER_GROUPS = "${var.nubis_user_groups}"
-  }
-
-  lifecycle {
-    create_before_destroy = true
   }
 }
 
