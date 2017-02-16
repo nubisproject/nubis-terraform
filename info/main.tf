@@ -2,7 +2,7 @@ provider "aws" {
   region = "${var.region}"
 }
 
-resource "terraform_remote_state" "info" {
+data "terraform_remote_state" "info" {
   backend = "http"
 
   config {

@@ -11,7 +11,7 @@ provider "aws" {
 
 resource "aws_s3_bucket" "bucket" {
   # Bucket can't be more than 63 characters long, so truncate away randomness
-  bucket = "${replace(template_file.random.rendered,"/^(.{63}).*/","$1")}"
+  bucket = "${replace(data.template_file.random.rendered,"/^(.{63}).*/","$1")}"
 
   acl = "private"
 
@@ -72,8 +72,8 @@ resource "tls_private_key" "random" {
   algorithm = "ECDSA"
 }
 
-resource "template_file" "random" {
-  template = "${bucket}-${random}"
+data "template_file" "random" {
+  template = "$${bucket}-$${random}"
 
   vars = {
     random = "${tls_private_key.random.id}"
