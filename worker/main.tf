@@ -75,6 +75,8 @@ resource "aws_launch_configuration" "launch_config" {
   # IAM Role (can be empty)
   iam_instance_profile = "${coalesce(var.instance_profile, aws_iam_instance_profile.extra.name)}"
 
+  associate_public_ip_address = "${var.public}"
+
   # Default ones for all instances in the VPC
   # plus one more, just for us  
   security_groups = [
@@ -82,6 +84,7 @@ resource "aws_launch_configuration" "launch_config" {
     "${coalesce(aws_security_group.extra.id, var.security_group)}",
     "${element(split(",",data.template_file.monitoring.rendered), var.monitoring)}",
   ]
+
 
   user_data = "${data.template_file.user_data.rendered}"
 
@@ -117,7 +120,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
-    "${split(",",module.info.private_subnets)}",
+    "${split(",",var.public ? module.info.public_subnets : module.info.private_subnets)}",
   ]
 
   load_balancers = [

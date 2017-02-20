@@ -109,3 +109,7 @@ variable "nubis_user_groups" {
 variable "root_storage_size" {
   default = "0"
 }
+
+variable "public" {
+  default = false
+}
