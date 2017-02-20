@@ -10,7 +10,9 @@ provider "aws" {
 }
 
 resource "aws_security_group" "extra" {
-  count = "${signum(length(var.security_group)) + 1 % 2}"
+  count = "${( 1 + var.security_group_custom ) % 2}"
+
+  name_prefix = "${var.service_name}-${var.environment}-${var.purpose}-"
 
   vpc_id = "${module.info.vpc_id}"
 
@@ -27,7 +29,9 @@ resource "aws_security_group" "extra" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [
+      "${module.info.ssh_security_group}"
+    ]
   }
 
   ingress {
@@ -56,15 +60,6 @@ resource "aws_security_group" "extra" {
   }
 }
 
-data "template_file" "monitoring" {
-  template = "$${ONE},$${TWO}"
-
-  vars = {
-    ONE = "${coalesce(aws_security_group.extra.id, var.security_group)}"
-    TWO = "${module.info.monitoring_security_group}"
-  }
-}
-
 resource "aws_launch_configuration" "launch_config" {
   name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-"
 
@@ -81,10 +76,9 @@ resource "aws_launch_configuration" "launch_config" {
   # plus one more, just for us  
   security_groups = [
     "${split(",", module.info.instance_security_groups)}",
-    "${coalesce(aws_security_group.extra.id, var.security_group)}",
-    "${element(split(",",data.template_file.monitoring.rendered), var.monitoring)}",
+    "${compact(list(var.monitoring ? module.info.monitoring_security_group : "" )) }",
+    "${element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0)}",
   ]
-
 
   user_data = "${data.template_file.user_data.rendered}"
 
