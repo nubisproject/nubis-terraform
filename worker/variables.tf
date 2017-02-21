@@ -54,6 +54,10 @@ variable "security_group" {
   default = ""
 }
 
+variable "security_group_custom" {
+  default = false
+}
+
 variable "nubis_version" {
   default = ""
 }
