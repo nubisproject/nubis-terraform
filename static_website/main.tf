@@ -32,7 +32,9 @@ resource "aws_s3_bucket" "origin" {
     {
       "Sid": "PublicReadForGetBucketObjects",
       "Effect": "Allow",
-      "Principal": "*",
+      "Principal": {
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
+      },
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::${var.origin_bucket}-${var.environment}/*"
     }
@@ -53,6 +55,10 @@ EOF
 
 }
 
+resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
+    comment = "${var.origin_bucket}-${Var.environment}"
+}
+
 resource "aws_cloudfront_distribution" "cdn" {
   depends_on = [ "aws_s3_bucket.origin"]
 
@@ -64,6 +70,10 @@ resource "aws_cloudfront_distribution" "cdn" {
   origin {
     domain_name = "${aws_s3_bucket.origin.bucket}.s3.amazonaws.com"
     origin_id   = "website-bucket-origin"
+
+    s3_origin_config {
+      origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
+    }
   }
 
   aliases = [
