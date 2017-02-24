@@ -55,8 +55,19 @@ EOF
 
 }
 
+resource "aws_s3_bucket" "origin-logs" {
+  bucket  = "${var.origin_bucket}-${var.environment}-logs"
+  acl     = "private"
+
+  tags {
+    Name            = "${var.origin_bucket}-origin-logs"
+    Environment     = "${var.environment}"
+    TechnicalOwner  = "${var.technical_owner}"
+  }
+}
+
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-    comment = "${var.origin_bucket}-${Var.environment}"
+    comment = "${var.origin_bucket}-${var.environment}"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
@@ -79,6 +90,11 @@ resource "aws_cloudfront_distribution" "cdn" {
   aliases = [
     "${var.origin_bucket}.${var.environment}.${var.region}.${var.account}.${var.nubis_domain}"
   ]
+
+  logging_config {
+    include_cookies = false
+    bucket          = "${aws_s3_bucket.origin.bucket_domain_name}"
+  }
 
   default_cache_behavior {
     allowed_methods   = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
