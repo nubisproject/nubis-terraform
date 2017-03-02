@@ -43,8 +43,8 @@ resource "aws_s3_bucket" "origin" {
 EOF
 
   website {
-    index_document = "index.html"
-    error_document = "404.html"
+    index_document = "${coalesce(var.index_document, "index.html")}"
+    error_document = "${coalesce(var.error_document, "404.html")}"
     routing_rules  = <<EOF
 [
   {
@@ -87,7 +87,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   enabled             = true
   comment             = "Static site for ${var.origin_bucket}-${var.environment}"
-  default_root_object = "index.html"
+  default_root_object = "${coalesce(var.index_document, "index.html")}"
   retain_on_delete    = true
 
   origin {

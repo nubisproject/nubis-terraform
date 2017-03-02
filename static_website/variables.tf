@@ -17,3 +17,11 @@ variable "technical_owner" {
 
 variable "origin_bucket" {
 }
+
+variable "index_document" {
+  default = "index.html"
+}
+
+variable "error_document" {
+  defaullt = "404.html"
+}
