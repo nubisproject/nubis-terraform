@@ -45,6 +45,18 @@ EOF
   website {
     index_document = "index.html"
     error_document = "404.html"
+    routing_rules  = <<EOF
+[
+  {
+    "Condition": {
+      "KeyPrefixEquals": "/"
+    },
+    "Redirect": {
+      "ReplaceKeyWith": "index.html"
+    }
+  }
+]
+EOF
   }
 
   tags {
@@ -57,7 +69,7 @@ EOF
 
 resource "aws_s3_bucket" "origin-logs" {
   bucket  = "${var.origin_bucket}-${var.environment}-logs"
-  acl     = "private"
+  acl     = "log-delivery-write"
 
   tags {
     Name            = "${var.origin_bucket}-origin-logs"
@@ -80,7 +92,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   origin {
     domain_name = "${aws_s3_bucket.origin.bucket}.s3.amazonaws.com"
-    origin_id   = "website-bucket-origin"
+    origin_id   = "s3-${var.origin_bucket}"
 
     s3_origin_config {
       origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
@@ -93,7 +105,8 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   logging_config {
     include_cookies = false
-    bucket          = "${aws_s3_bucket.origin.bucket_domain_name}"
+    prefix          = "${aws_s3_bucket.origin.bucket}"
+    bucket          = "${aws_s3_bucket.origin-logs.bucket_domain_name}"
   }
 
   default_cache_behavior {
