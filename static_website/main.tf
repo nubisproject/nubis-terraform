@@ -52,7 +52,7 @@ EOF
       "KeyPrefixEquals": "/"
     },
     "Redirect": {
-      "ReplaceKeyWith": "index.html"
+      "ReplaceKeyWith": "${coalesce(var.index_document, "index.html")}"
     }
   }
 ]
