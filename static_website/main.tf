@@ -92,7 +92,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
   origin {
     domain_name = "${aws_s3_bucket.origin.bucket}.s3.amazonaws.com"
-    origin_id   = "s3-${var.origin_bucket}"
+    origin_id   = "s3-${aws_s3_bucket.origin.bucket}"
 
     s3_origin_config {
       origin_access_identity = "${aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path}"
@@ -112,7 +112,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_cache_behavior {
     allowed_methods   = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods    = ["GET", "HEAD"]
-    target_origin_id  = "website-bucket-origin"
+    target_origin_id  = "s3-${aws_s3_bucket.origin.bucket}"
 
     forwarded_values {
       query_string = true
