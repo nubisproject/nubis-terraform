@@ -33,10 +33,10 @@ resource "aws_s3_bucket" "origin" {
       "Sid": "PublicReadForGetBucketObjects",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
+        "AWS": "${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
       },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${var.origin_bucket}-${var.environment}/*"
+      "Resource": "${aws_s3_bucket.origin.arn}/*"
     }
   ]
 }
@@ -91,7 +91,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   retain_on_delete    = true
 
   origin {
-    domain_name = "${aws_s3_bucket.origin.bucket}.s3.amazonaws.com"
+    domain_name = "${aws_s3_bucket.origin.bucket_domain_name}"
     origin_id   = "s3-${aws_s3_bucket.origin.bucket}"
 
     s3_origin_config {
@@ -110,7 +110,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   default_cache_behavior {
-    allowed_methods   = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    allowed_methods   = ["GET", "HEAD"]
     cached_methods    = ["GET", "HEAD"]
     target_origin_id  = "s3-${aws_s3_bucket.origin.bucket}"
 
