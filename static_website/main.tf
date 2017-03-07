@@ -23,7 +23,7 @@ resource "aws_route53_record" "root-domain" {
 }
 
 resource "aws_s3_bucket" "origin" {
-  bucket  = "${var.origin_bucket}-${var.environment}-${uuid()}"
+  bucket  = "${var.origin_bucket}-${var.environment}"
   acl     = "public-read"
   policy  = <<EOF
 {
@@ -33,7 +33,7 @@ resource "aws_s3_bucket" "origin" {
       "Sid": "PublicReadForGetBucketObjects",
       "Effect": "Allow",
       "Principal": {
-        "AWS": "${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
+        "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
       },
       "Action": "s3:GetObject",
       "Resource": "arn:aws:s3:::${var.origin_bucket}-${var.environment}/*"
@@ -68,7 +68,7 @@ EOF
 }
 
 resource "aws_s3_bucket" "origin-logs" {
-  bucket  = "${var.origin_bucket}-${var.environment}-logs-${uuid()}"
+  bucket  = "${var.origin_bucket}-${var.environment}-logs"
   acl     = "log-delivery-write"
 
   tags {
