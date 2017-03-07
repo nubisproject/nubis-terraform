@@ -23,5 +23,5 @@ variable "index_document" {
 }
 
 variable "error_document" {
-  defaullt = "404.html"
+  default = "404.html"
 }
