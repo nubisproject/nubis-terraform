@@ -9,3 +9,7 @@ output "cloudfront_dns" {
 output "website_origin" {
   value = "${aws_s3_bucket.origin.website_endpoint}"
 }
+
+output "origin_bucket" {
+  value = "${aws_s3_bucket.origin.bucket}"
+}

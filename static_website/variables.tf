@@ -25,3 +25,6 @@ variable "index_document" {
 variable "error_document" {
   default = "404.html"
 }
+
+variable acm-certificate-arn {
+}

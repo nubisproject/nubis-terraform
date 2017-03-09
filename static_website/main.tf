@@ -9,6 +9,14 @@ provider "aws" {
   region = "${var.region}"
 }
 
+resource random_id "uuid" {
+  byte_length = 8
+
+  keepers = {
+    origin_bucket = "${var.origin_bucket}"
+  }
+}
+
 resource "aws_route53_record" "root-domain" {
   zone_id = "${module.info.hosted_zone_id}"
   name    = "${var.origin_bucket}.${var.environment}"
@@ -23,7 +31,7 @@ resource "aws_route53_record" "root-domain" {
 }
 
 resource "aws_s3_bucket" "origin" {
-  bucket  = "${var.origin_bucket}-${var.environment}"
+  bucket  = "${var.origin_bucket}-${var.environment}-${random_id.uuid.hex}"
   acl     = "public-read"
   policy  = <<EOF
 {
@@ -36,7 +44,7 @@ resource "aws_s3_bucket" "origin" {
         "AWS": "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity ${aws_cloudfront_origin_access_identity.origin_access_identity.id}"
       },
       "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::${var.origin_bucket}-${var.environment}/*"
+      "Resource": "arn:aws:s3:::${var.origin_bucket}-${var.environment}-${random_id.uuid.hex}/*"
     }
   ]
 }
@@ -68,7 +76,7 @@ EOF
 }
 
 resource "aws_s3_bucket" "origin-logs" {
-  bucket  = "${var.origin_bucket}-${var.environment}-logs"
+  bucket  = "${var.origin_bucket}-${var.environment}-logs-${random_id.uuid.hex}"
   acl     = "log-delivery-write"
 
   tags {
@@ -120,7 +128,7 @@ resource "aws_cloudfront_distribution" "cdn" {
         forward = "none"
       }
     }
-    viewer_protocol_policy = "allow-all"
+    viewer_protocol_policy  = "redirect-to-https"
     min_ttl                = 0
     default_ttl            = 30
     max_ttl                = 86400
@@ -133,7 +141,9 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn       = "${var.acm-certificate-arn}"
+    ssl_support_method        = "sni-only"
+    minimum_protocol_version  = "TLSv1"
   }
 
   tags {
