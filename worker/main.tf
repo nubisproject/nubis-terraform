@@ -72,6 +72,8 @@ resource "aws_launch_configuration" "launch_config" {
 
   associate_public_ip_address = "${var.public}"
 
+  enable_monitoring = false
+
   # Default ones for all instances in the VPC
   # plus one more, just for us  
   security_groups = [
