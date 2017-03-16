@@ -61,3 +61,7 @@ variable "multi_az" {
 variable "parameter_group_name" {
   default = ""
 }
+
+variable "monitoring" {
+  default = false
+}
