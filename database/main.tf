@@ -5,8 +5,47 @@ module "info" {
   account     = "${var.account}"
 }
 
+# Discover Consul settings
+module "consul" {
+  source       = "../consul"
+  region       = "${var.region}"
+  environment  = "${var.environment}"
+  account      = "${var.account}"
+  service_name = "${var.service_name}"
+}
+
+# Configure our Consul provider, module can't do it for us
+provider "consul" {
+  address    = "${module.consul.address}"
+  scheme     = "${module.consul.scheme}"
+  datacenter = "${module.consul.datacenter}"
+}
+
 provider "aws" {
   region = "${var.region}"
+}
+
+module "monitor-image" {
+  source = "../images"
+
+  region  = "${var.region}"
+  project = "nubis-db-admin"
+
+  # Just pick latest since we don't really know for sure
+  version = "*"
+}
+
+module "monitor" {
+  source       = "../worker"
+  enabled      = "${var.monitoring}"
+  region       = "${var.region}"
+  environment  = "${var.environment}"
+  account      = "${var.account}"
+  service_name = "${var.service_name}"
+  ami          = "${module.monitor-image.image_id}"
+  purpose      = "db-monitor"
+
+  instance_type = "t2.nano"
 }
 
 resource "aws_security_group" "database" {
@@ -28,6 +67,7 @@ resource "aws_security_group" "database" {
 
     security_groups = [
       "${split(",",var.client_security_groups)}",
+      "${compact(list(module.monitor.security_group))}",
     ]
   }
 
@@ -129,5 +169,33 @@ data "template_file" "password" {
 
   vars = {
     password32 = "${replace(tls_private_key.random.id,"/^(.{32}).*/","$1")}"
+  }
+}
+
+# Publish our outputs into Consul for our application to consume
+resource "consul_keys" "database" {
+  # The rest, we publish to
+  key {
+    path   = "${module.consul.config_prefix}/Database/Name"
+    value  = "${aws_db_instance.database.name}"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Database/Server"
+    value  = "${aws_db_instance.database.address}"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Database/User"
+    value  = "${aws_db_instance.database.username}"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Database/Password"
+    value  = "${aws_db_instance.database.password}"
+    delete = true
   }
 }
