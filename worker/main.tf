@@ -10,7 +10,7 @@ provider "aws" {
 }
 
 resource "aws_security_group" "extra" {
-  count = "${( 1 + var.security_group_custom ) % 2}"
+  count = "${var.enabled * ( 1 + var.security_group_custom ) % 2}"
 
   name_prefix = "${var.service_name}-${var.environment}-${var.purpose}-"
 
@@ -26,11 +26,12 @@ resource "aws_security_group" "extra" {
   }
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+
     security_groups = [
-      "${module.info.ssh_security_group}"
+      "${module.info.ssh_security_group}",
     ]
   }
 
@@ -61,6 +62,7 @@ resource "aws_security_group" "extra" {
 }
 
 resource "aws_launch_configuration" "launch_config" {
+  count       = "${var.enabled}"
   name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-"
 
   image_id      = "${var.ami}"
@@ -71,6 +73,8 @@ resource "aws_launch_configuration" "launch_config" {
   iam_instance_profile = "${coalesce(var.instance_profile, aws_iam_instance_profile.extra.name)}"
 
   associate_public_ip_address = "${var.public}"
+
+  enable_monitoring = false
 
   # Default ones for all instances in the VPC
   # plus one more, just for us  
@@ -103,6 +107,7 @@ variable "health_check_type_map" {
 }
 
 resource "aws_autoscaling_group" "asg" {
+  count                = "${var.enabled}"
   name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
   max_size             = "${coalesce(var.max_instances, 1 + (4*var.min_instances) )}"
   min_size             = "${var.min_instances}"
@@ -180,7 +185,7 @@ resource "aws_autoscaling_group" "asg" {
 
 resource "aws_iam_instance_profile" "extra" {
   # Create only if instance_profile isn't set
-  count = "${signum(length(var.instance_profile)) + 1 % 2}"
+  count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2)}"
 
   name  = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
   roles = ["${coalesce(var.role, aws_iam_role.extra.name)}"]
@@ -192,7 +197,7 @@ resource "aws_iam_instance_profile" "extra" {
 
 resource "aws_iam_role" "extra" {
   # Create only if instance_profile isn't set and role isn't set
-  count = "${(signum(length(var.instance_profile)) + 1 % 2) * ( signum(length(var.role)) + 1 % 2 ) }"
+  count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2) * ( signum(length(var.role)) + 1 % 2 ) }"
 
   name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-role"
 
@@ -218,6 +223,7 @@ EOF
 }
 
 data "template_file" "user_data" {
+  count    = "${var.enabled}"
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
@@ -237,7 +243,7 @@ data "template_file" "user_data" {
 }
 
 resource "aws_autoscaling_policy" "up" {
-  count                  = "${signum(var.scale_load_defaults + signum(length(var.scale_up_load)))}"
+  count                  = "${var.enabled * (signum(var.scale_load_defaults + signum(length(var.scale_up_load))))}"
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-asp"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
@@ -246,7 +252,7 @@ resource "aws_autoscaling_policy" "up" {
 }
 
 resource "aws_autoscaling_policy" "down" {
-  count                  = "${signum(var.scale_load_defaults + signum(length(var.scale_down_load)))}"
+  count                  = "${var.enabled * (signum(var.scale_load_defaults + signum(length(var.scale_down_load))))}"
   name                   = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-asp"
   scaling_adjustment     = -1
   adjustment_type        = "ChangeInCapacity"
@@ -255,7 +261,7 @@ resource "aws_autoscaling_policy" "down" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "up" {
-  count               = "${signum(var.scale_load_defaults + signum(length(var.scale_up_load)))}"
+  count               = "${var.enabled * (signum(var.scale_load_defaults + signum(length(var.scale_up_load))))}"
   alarm_name          = "${var.service_name}-${var.environment}-${var.purpose}-scaleup-alarm"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = "2"
@@ -274,7 +280,7 @@ resource "aws_cloudwatch_metric_alarm" "up" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "down" {
-  count               = "${signum(var.scale_load_defaults + signum(length(var.scale_down_load)))}"
+  count               = "${var.enabled * (signum(var.scale_load_defaults + signum(length(var.scale_down_load))))}"
   alarm_name          = "${var.service_name}-${var.environment}-${var.purpose}-scaledown-alarm"
   comparison_operator = "LessThanOrEqualToThreshold"
   evaluation_periods  = "2"
@@ -293,7 +299,7 @@ resource "aws_cloudwatch_metric_alarm" "down" {
 }
 
 resource "aws_key_pair" "ssh" {
-  count      = "${signum(length(var.ssh_key_file))}"
+  count      = "${var.enabled * (signum(length(var.ssh_key_file)))}"
   public_key = "${file(var.ssh_key_file)}"
   key_name   = "${var.ssh_key_name}"
 }

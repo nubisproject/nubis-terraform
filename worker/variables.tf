@@ -14,6 +14,10 @@ variable "migrate" {
   default = 1
 }
 
+variable "enabled" {
+  default = 1
+}
+
 variable "instance_type" {
   default = "t2.nano"
 }
