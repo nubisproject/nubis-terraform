@@ -18,3 +18,11 @@ variable "role" {}
 variable "role_cnt" {
   default = 1
 }
+
+variable "website_index" {
+  default = "index.html"
+}
+
+variable "acl" {
+  default = "private"
+}

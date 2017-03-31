@@ -13,13 +13,17 @@ resource "aws_s3_bucket" "bucket" {
   # Bucket can't be more than 63 characters long, so truncate away randomness
   bucket = "${replace(data.template_file.random.rendered,"/^(.{63}).*/","$1")}"
 
-  acl = "private"
+  acl = "${var.acl}"
 
   # Allow destruction of non-empty buckets
   force_destroy = true
 
   versioning {
     enabled = true
+  }
+
+  website {
+    index_document = "${var.website_index}"
   }
 
   tags = {
