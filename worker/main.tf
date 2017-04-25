@@ -230,6 +230,7 @@ data "template_file" "user_data" {
     NUBIS_STACK       = ""
     NUBIS_PROJECT     = "${var.service_name}"
     CONSUL_ACL_TOKEN  = "${var.consul_token}"
+    NUBIS_TECHNICAL_OWNER = "${var.technical_owner}"
     NUBIS_PURPOSE     = "${var.purpose}"
     NUBIS_ENVIRONMENT = "${var.environment}"
     NUBIS_DOMAIN      = "${var.nubis_domain}"
