@@ -10,10 +10,6 @@ variable "nubis_domain" {
 
 variable "ami" {}
 
-variable "migrate" {
-  default = 1
-}
-
 variable "enabled" {
   default = 1
 }
