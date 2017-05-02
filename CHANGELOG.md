@@ -1,5 +1,34 @@
 # Change Log
 
+## [v1.4.2](https://github.com/nubisproject/nubis-terraform/tree/v1.4.2) (2017-05-02)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.1...v1.4.2)
+
+**Closed issues:**
+
+- \[worker\] Expose technical\_owner in user-data [\#67](https://github.com/nubisproject/nubis-terraform/issues/67)
+- Get rid of NUBIS\_MIGRATE [\#65](https://github.com/nubisproject/nubis-terraform/issues/65)
+- \[bucket\] Missing bucket object ACL permissions [\#63](https://github.com/nubisproject/nubis-terraform/issues/63)
+- Tag sensitive outputs [\#46](https://github.com/nubisproject/nubis-terraform/issues/46)
+- Devise a standard mechanism so modules can depend on one another. [\#7](https://github.com/nubisproject/nubis-terraform/issues/7)
+
+**Merged pull requests:**
+
+- Add NUBIS\_TECHNICAL\_OWNER to instances user-data [\#68](https://github.com/nubisproject/nubis-terraform/pull/68) ([gozer](https://github.com/gozer))
+- Get rid of NUBIS\_MIGRATE [\#66](https://github.com/nubisproject/nubis-terraform/pull/66) ([gozer](https://github.com/gozer))
+- \[bucket\] Add s3:\*Acl permissions for consumers [\#64](https://github.com/nubisproject/nubis-terraform/pull/64) ([gozer](https://github.com/gozer))
+
+## [v1.4.1](https://github.com/nubisproject/nubis-terraform/tree/v1.4.1) (2017-04-11)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.0...v1.4.1)
+
+**Closed issues:**
+
+- Tag v1.4.1 release [\#60](https://github.com/nubisproject/nubis-terraform/issues/60)
+
+**Merged pull requests:**
+
+- Merge v1.4.1 release into develop. \[skip ci\] [\#62](https://github.com/nubisproject/nubis-terraform/pull/62) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#61](https://github.com/nubisproject/nubis-terraform/pull/61) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v1.4.0](https://github.com/nubisproject/nubis-terraform/tree/v1.4.0) (2017-04-05)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.3.0...v1.4.0)
 
