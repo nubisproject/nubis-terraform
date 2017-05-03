@@ -65,11 +65,14 @@ resource "aws_security_group" "database" {
     to_port   = 3306
     protocol  = "tcp"
 
+    cidr_blocks = [
+      "${compact(split(",",var.client_ip_cidr))}",
+    ]
+
     security_groups = [
       "${split(",",var.client_security_groups)}",
       "${compact(list(module.monitor.security_group))}",
-      "${compact(split(",",var.client_ip_cidr))}",
-    ]
+    ]   
   }
 
   ingress {
