@@ -1,18 +1,57 @@
 # Change Log
 
-## [v1.4.0](https://github.com/nubisproject/nubis-terraform/tree/v1.4.0) (2017-03-22)
+## [v1.4.2](https://github.com/nubisproject/nubis-terraform/tree/v1.4.2) (2017-05-03)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.1...v1.4.2)
+
+**Closed issues:**
+
+- Tag v1.4.2 release [\#70](https://github.com/nubisproject/nubis-terraform/issues/70)
+- \[worker\] Expose technical\_owner in user-data [\#67](https://github.com/nubisproject/nubis-terraform/issues/67)
+- Get rid of NUBIS\_MIGRATE [\#65](https://github.com/nubisproject/nubis-terraform/issues/65)
+- \[bucket\] Missing bucket object ACL permissions [\#63](https://github.com/nubisproject/nubis-terraform/issues/63)
+- Tag sensitive outputs [\#46](https://github.com/nubisproject/nubis-terraform/issues/46)
+- Devise a standard mechanism so modules can depend on one another. [\#7](https://github.com/nubisproject/nubis-terraform/issues/7)
+
+**Merged pull requests:**
+
+- Merge v1.4.2 release into develop. \[skip ci\] [\#72](https://github.com/nubisproject/nubis-terraform/pull/72) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.2 release \[skip ci\] [\#71](https://github.com/nubisproject/nubis-terraform/pull/71) ([tinnightcap](https://github.com/tinnightcap))
+- Add NUBIS\_TECHNICAL\_OWNER to instances user-data [\#68](https://github.com/nubisproject/nubis-terraform/pull/68) ([gozer](https://github.com/gozer))
+- Get rid of NUBIS\_MIGRATE [\#66](https://github.com/nubisproject/nubis-terraform/pull/66) ([gozer](https://github.com/gozer))
+- \[bucket\] Add s3:\*Acl permissions for consumers [\#64](https://github.com/nubisproject/nubis-terraform/pull/64) ([gozer](https://github.com/gozer))
+
+## [v1.4.1](https://github.com/nubisproject/nubis-terraform/tree/v1.4.1) (2017-04-11)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.0...v1.4.1)
+
+**Closed issues:**
+
+- Tag v1.4.1 release [\#60](https://github.com/nubisproject/nubis-terraform/issues/60)
+
+**Merged pull requests:**
+
+- Merge v1.4.1 release into develop. \[skip ci\] [\#62](https://github.com/nubisproject/nubis-terraform/pull/62) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.1 release \[skip ci\] [\#61](https://github.com/nubisproject/nubis-terraform/pull/61) ([tinnightcap](https://github.com/tinnightcap))
+
+## [v1.4.0](https://github.com/nubisproject/nubis-terraform/tree/v1.4.0) (2017-04-05)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.3.0...v1.4.0)
 
 **Closed issues:**
 
+- \[bucket\] Enable website and allow specifiying the index document [\#58](https://github.com/nubisproject/nubis-terraform/issues/58)
+- \[bucket\] Allow specifiying the default ACL [\#57](https://github.com/nubisproject/nubis-terraform/issues/57)
 - \[worker\] Add an enable flag to make the module optionnally enableable [\#50](https://github.com/nubisproject/nubis-terraform/issues/50)
 - \[database\] Add monitoring option to bring back db-admin host [\#49](https://github.com/nubisproject/nubis-terraform/issues/49)
 - set enable\_monitoring=false on all aws\_launch\_configuration resources [\#47](https://github.com/nubisproject/nubis-terraform/issues/47)
 - Convert over to Terraform 0.8.x [\#38](https://github.com/nubisproject/nubis-terraform/issues/38)
 - Support for newer versions of Terraform [\#37](https://github.com/nubisproject/nubis-terraform/issues/37)
+- \[load\_balancer\] Send logs to the ELB bucket [\#8](https://github.com/nubisproject/nubis-terraform/issues/8)
+- Tag v1.4.0 release [\#33](https://github.com/nubisproject/nubis-terraform/issues/33)
 
 **Merged pull requests:**
 
+- \[bucket\] Add acl and website\_index options [\#59](https://github.com/nubisproject/nubis-terraform/pull/59) ([gozer](https://github.com/gozer))
+- Merge v1.4.0 release into develop. \[skip ci\] [\#54](https://github.com/nubisproject/nubis-terraform/pull/54) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.0 release \[skip ci\] [\#53](https://github.com/nubisproject/nubis-terraform/pull/53) ([tinnightcap](https://github.com/tinnightcap))
 - \[database\] Add a monitoring \(default false\) paramater to launch a db-admin host [\#52](https://github.com/nubisproject/nubis-terraform/pull/52) ([gozer](https://github.com/gozer))
 - Add an enable \(default true\) to worker module [\#51](https://github.com/nubisproject/nubis-terraform/pull/51) ([gozer](https://github.com/gozer))
 - Disabled detailed monitoring for ASGs [\#48](https://github.com/nubisproject/nubis-terraform/pull/48) ([gozer](https://github.com/gozer))
@@ -20,8 +59,10 @@
 - add public option for workers [\#42](https://github.com/nubisproject/nubis-terraform/pull/42) ([gozer](https://github.com/gozer))
 - Fix info outputs for TF 0.8 [\#41](https://github.com/nubisproject/nubis-terraform/pull/41) ([gozer](https://github.com/gozer))
 - Convert to TF 0.8 friendly [\#39](https://github.com/nubisproject/nubis-terraform/pull/39) ([gozer](https://github.com/gozer))
+- Ship logs to the account's ELB bucket [\#35](https://github.com/nubisproject/nubis-terraform/pull/35) ([gozer](https://github.com/gozer))
+- Ship logs to the account's ELB bucket [\#34](https://github.com/nubisproject/nubis-terraform/pull/34) ([gozer](https://github.com/gozer))
 
-## [v1.3.0](https://github.com/nubisproject/nubis-terraform/tree/v1.3.0) (2017-01-31)
+## [v1.3.0](https://github.com/nubisproject/nubis-terraform/tree/v1.3.0) (2017-01-20)
 **Closed issues:**
 
 - \[database\] Allow self crosstalk for DB replication [\#31](https://github.com/nubisproject/nubis-terraform/issues/31)
@@ -35,13 +76,10 @@
 - \[worker\] Inject ldap group information to user data [\#12](https://github.com/nubisproject/nubis-terraform/issues/12)
 - \[load\_balancer\] Support custom SSL certificates [\#10](https://github.com/nubisproject/nubis-terraform/issues/10)
 - \[load\_balancer\] Support non-default SSL certificate [\#9](https://github.com/nubisproject/nubis-terraform/issues/9)
-- \[load\_balancer\] Send logs to the ELB bucket [\#8](https://github.com/nubisproject/nubis-terraform/issues/8)
 - Tag v1.3.0 release [\#24](https://github.com/nubisproject/nubis-terraform/issues/24)
 
 **Merged pull requests:**
 
-- Ship logs to the account's ELB bucket [\#35](https://github.com/nubisproject/nubis-terraform/pull/35) ([gozer](https://github.com/gozer))
-- Ship logs to the account's ELB bucket [\#34](https://github.com/nubisproject/nubis-terraform/pull/34) ([gozer](https://github.com/gozer))
 - Allow self traffic between the same DB instances [\#32](https://github.com/nubisproject/nubis-terraform/pull/32) ([gozer](https://github.com/gozer))
 - Add support for multiple roles, must pass in role\_cnt \(sic\) [\#30](https://github.com/nubisproject/nubis-terraform/pull/30) ([gozer](https://github.com/gozer))
 - Use the full available randomness before truncating down [\#28](https://github.com/nubisproject/nubis-terraform/pull/28) ([gozer](https://github.com/gozer))
