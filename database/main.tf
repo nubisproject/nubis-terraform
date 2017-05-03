@@ -68,6 +68,7 @@ resource "aws_security_group" "database" {
     security_groups = [
       "${split(",",var.client_security_groups)}",
       "${compact(list(module.monitor.security_group))}",
+      "${compact(split(",",var.client_ip_cidr))}",
     ]
   }
 
