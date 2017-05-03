@@ -50,6 +50,7 @@ module "monitor" {
 
 resource "aws_security_group" "database" {
   vpc_id = "${module.info.vpc_id}"
+  name   = "${var.service_name}-${var.environment}-rds"
 
   tags = {
     Name           = "${var.service_name}-${var.environment}-rds"
