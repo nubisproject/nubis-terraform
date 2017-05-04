@@ -50,6 +50,7 @@ module "monitor" {
 
 resource "aws_security_group" "database" {
   vpc_id = "${module.info.vpc_id}"
+  name   = "${var.service_name}-${var.environment}-rds"
 
   tags = {
     Name           = "${var.service_name}-${var.environment}-rds"
@@ -64,6 +65,10 @@ resource "aws_security_group" "database" {
     from_port = 3306
     to_port   = 3306
     protocol  = "tcp"
+
+    cidr_blocks = [
+      "${compact(split(",",var.client_ip_cidr))}",
+    ]
 
     security_groups = [
       "${split(",",var.client_security_groups)}",
