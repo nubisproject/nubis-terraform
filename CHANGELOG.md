@@ -1,19 +1,36 @@
 # Change Log
 
+## [v1.5.0](https://github.com/nubisproject/nubis-terraform/tree/v1.5.0) (2017-06-24)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.2...v1.5.0)
+
+**Closed issues:**
+
+- \[database\] Allow specifiying access to IP CIDRs [\#77](https://github.com/nubisproject/nubis-terraform/issues/77)
+- Create static\_website module [\#44](https://github.com/nubisproject/nubis-terraform/issues/44)
+- \[worker\] Add CPU Usage based autoscaling up/down [\#1](https://github.com/nubisproject/nubis-terraform/issues/1)
+
+**Merged pull requests:**
+
+- \[info\] Add sso\_security\_group [\#79](https://github.com/nubisproject/nubis-terraform/pull/79) ([gozer](https://github.com/gozer))
+- \[database\] Add client\_ip\_cidr option [\#78](https://github.com/nubisproject/nubis-terraform/pull/78) ([gozer](https://github.com/gozer))
+
 ## [v1.4.2](https://github.com/nubisproject/nubis-terraform/tree/v1.4.2) (2017-05-03)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.1...v1.4.2)
 
 **Closed issues:**
 
-- Tag v1.4.2 release [\#70](https://github.com/nubisproject/nubis-terraform/issues/70)
 - \[worker\] Expose technical\_owner in user-data [\#67](https://github.com/nubisproject/nubis-terraform/issues/67)
 - Get rid of NUBIS\_MIGRATE [\#65](https://github.com/nubisproject/nubis-terraform/issues/65)
 - \[bucket\] Missing bucket object ACL permissions [\#63](https://github.com/nubisproject/nubis-terraform/issues/63)
 - Tag sensitive outputs [\#46](https://github.com/nubisproject/nubis-terraform/issues/46)
 - Devise a standard mechanism so modules can depend on one another. [\#7](https://github.com/nubisproject/nubis-terraform/issues/7)
+- Tag v1.4.2 release [\#73](https://github.com/nubisproject/nubis-terraform/issues/73)
+- Tag v1.4.2 release [\#70](https://github.com/nubisproject/nubis-terraform/issues/70)
 
 **Merged pull requests:**
 
+- Merge v1.4.2 release into develop. \[skip ci\] [\#76](https://github.com/nubisproject/nubis-terraform/pull/76) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.4.2 release \[skip ci\] [\#75](https://github.com/nubisproject/nubis-terraform/pull/75) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.4.2 release into develop. \[skip ci\] [\#72](https://github.com/nubisproject/nubis-terraform/pull/72) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.4.2 release \[skip ci\] [\#71](https://github.com/nubisproject/nubis-terraform/pull/71) ([tinnightcap](https://github.com/tinnightcap))
 - Add NUBIS\_TECHNICAL\_OWNER to instances user-data [\#68](https://github.com/nubisproject/nubis-terraform/pull/68) ([gozer](https://github.com/gozer))

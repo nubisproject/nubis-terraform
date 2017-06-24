@@ -18,6 +18,10 @@ variable "technical_owner" {
 
 variable "client_security_groups" {}
 
+variable "client_ip_cidr" {
+  default = ""
+}
+
 variable "allocated_storage" {
   default = 10
 }

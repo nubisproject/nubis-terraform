@@ -46,6 +46,10 @@ output "shared_services_security_group" {
   value = "${data.terraform_remote_state.info.shared_services_security_group}"
 }
 
+output "sso_security_group" {
+  value = "${data.terraform_remote_state.info.sso_security_group}"
+}
+
 output "instance_security_groups" {
   value = "${data.terraform_remote_state.info.instance_security_groups}"
 }
