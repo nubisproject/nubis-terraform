@@ -69,3 +69,11 @@ variable "parameter_group_name" {
 variable "monitoring" {
   default = false
 }
+
+variable "nubis_sudo_groups" {
+  default = "nubis_global_admins"
+}
+
+variable "nubis_user_groups" {
+  default = ""
+}
