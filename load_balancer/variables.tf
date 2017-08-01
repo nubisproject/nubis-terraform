@@ -59,3 +59,7 @@ variable "protocol_http" {
 variable "protocol_https" {
   default = "https"
 }
+
+variable "internal" {
+  default = false
+}
