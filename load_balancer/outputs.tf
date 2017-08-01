@@ -17,3 +17,7 @@ output "zone_id" {
 output "name" {
   value = "${aws_elb.load_balancer.name}"
 }
+
+output "source_security_group_id" {
+  value = "${aws_elb.load_balancer.source_security_group_id}"
+}
