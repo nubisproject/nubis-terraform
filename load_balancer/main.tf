@@ -105,6 +105,7 @@ resource "aws_elb" "load_balancer" {
   idle_timeout                = 60
   connection_draining         = true
   connection_draining_timeout = 60
+  internal                    = "${var.internal}"
 
   tags = {
     Name           = "${var.service_name}-${var.environment}"
