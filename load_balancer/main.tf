@@ -10,6 +10,8 @@ provider "aws" {
 }
 
 resource "aws_security_group" "load_balancer" {
+  name_prefix = "${var.service_name}-${var.environment}-"
+
   vpc_id = "${module.info.vpc_id}"
 
   ingress {
