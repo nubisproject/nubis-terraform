@@ -167,6 +167,12 @@ resource "aws_autoscaling_group" "asg" {
   }
 
   tag {
+    key                 = "Purpose"
+    value               = "${var.purpose}"
+    propagate_at_launch = true
+  }
+
+  tag {
     key                 = "Shutdown"
     value               = "never"
     propagate_at_launch = true

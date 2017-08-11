@@ -10,6 +10,8 @@ provider "aws" {
 }
 
 resource "aws_security_group" "load_balancer" {
+  name_prefix = "${var.service_name}-${var.environment}-"
+
   vpc_id = "${module.info.vpc_id}"
 
   ingress {
@@ -103,6 +105,7 @@ resource "aws_elb" "load_balancer" {
   idle_timeout                = 60
   connection_draining         = true
   connection_draining_timeout = 60
+  internal                    = "${var.internal}"
 
   tags = {
     Name           = "${var.service_name}-${var.environment}"
