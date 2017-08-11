@@ -1,5 +1,25 @@
 # Change Log
 
+## [v1.5.1](https://github.com/nubisproject/nubis-terraform/tree/v1.5.1) (2017-08-11)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.5.0...v1.5.1)
+
+**Closed issues:**
+
+- \[load\_balancer\] Expose the source\_security\_group\_id of the ELB [\#93](https://github.com/nubisproject/nubis-terraform/issues/93)
+- \[load\_balancer\] Security Groups are unnamed [\#91](https://github.com/nubisproject/nubis-terraform/issues/91)
+- \[elb\] Allow creating of internal ELBs [\#89](https://github.com/nubisproject/nubis-terraform/issues/89)
+- \[worker\] Add purpose tag [\#86](https://github.com/nubisproject/nubis-terraform/issues/86)
+- \[database\] Monitor host should support nubis\_{sudo,user}\_groups [\#84](https://github.com/nubisproject/nubis-terraform/issues/84)
+
+**Merged pull requests:**
+
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#98](https://github.com/nubisproject/nubis-terraform/pull/98) ([tinnightcap](https://github.com/tinnightcap))
+- \[load\_balancer\] expose the source security group id of the ELB [\#94](https://github.com/nubisproject/nubis-terraform/pull/94) ([gozer](https://github.com/gozer))
+- Correctly name ELB security groups [\#92](https://github.com/nubisproject/nubis-terraform/pull/92) ([gozer](https://github.com/gozer))
+- \[load-balancer\] Add 'internal' variable [\#90](https://github.com/nubisproject/nubis-terraform/pull/90) ([gozer](https://github.com/gozer))
+- Add purpose tag [\#87](https://github.com/nubisproject/nubis-terraform/pull/87) ([limed](https://github.com/limed))
+- Add nubis\_sudo\_groups and nubis\_user\_groups [\#85](https://github.com/nubisproject/nubis-terraform/pull/85) ([gozer](https://github.com/gozer))
+
 ## [v1.5.0](https://github.com/nubisproject/nubis-terraform/tree/v1.5.0) (2017-06-24)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.4.2...v1.5.0)
 
@@ -8,9 +28,12 @@
 - \[database\] Allow specifiying access to IP CIDRs [\#77](https://github.com/nubisproject/nubis-terraform/issues/77)
 - Create static\_website module [\#44](https://github.com/nubisproject/nubis-terraform/issues/44)
 - \[worker\] Add CPU Usage based autoscaling up/down [\#1](https://github.com/nubisproject/nubis-terraform/issues/1)
+- Tag v1.5.0 release [\#80](https://github.com/nubisproject/nubis-terraform/issues/80)
 
 **Merged pull requests:**
 
+- Merge v1.5.0 release into develop. \[skip ci\] [\#82](https://github.com/nubisproject/nubis-terraform/pull/82) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.0 release \[skip ci\] [\#81](https://github.com/nubisproject/nubis-terraform/pull/81) ([tinnightcap](https://github.com/tinnightcap))
 - \[info\] Add sso\_security\_group [\#79](https://github.com/nubisproject/nubis-terraform/pull/79) ([gozer](https://github.com/gozer))
 - \[database\] Add client\_ip\_cidr option [\#78](https://github.com/nubisproject/nubis-terraform/pull/78) ([gozer](https://github.com/gozer))
 
