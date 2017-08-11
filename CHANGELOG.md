@@ -10,9 +10,12 @@
 - \[elb\] Allow creating of internal ELBs [\#89](https://github.com/nubisproject/nubis-terraform/issues/89)
 - \[worker\] Add purpose tag [\#86](https://github.com/nubisproject/nubis-terraform/issues/86)
 - \[database\] Monitor host should support nubis\_{sudo,user}\_groups [\#84](https://github.com/nubisproject/nubis-terraform/issues/84)
+- Tag v1.5.1 release [\#97](https://github.com/nubisproject/nubis-terraform/issues/97)
 
 **Merged pull requests:**
 
+- Merge v1.5.1 release into develop. \[skip ci\] [\#100](https://github.com/nubisproject/nubis-terraform/pull/100) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#99](https://github.com/nubisproject/nubis-terraform/pull/99) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.5.1 release \[skip ci\] [\#98](https://github.com/nubisproject/nubis-terraform/pull/98) ([tinnightcap](https://github.com/tinnightcap))
 - \[load\_balancer\] expose the source security group id of the ELB [\#94](https://github.com/nubisproject/nubis-terraform/pull/94) ([gozer](https://github.com/gozer))
 - Correctly name ELB security groups [\#92](https://github.com/nubisproject/nubis-terraform/pull/92) ([gozer](https://github.com/gozer))
