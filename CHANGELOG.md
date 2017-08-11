@@ -13,6 +13,7 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#98](https://github.com/nubisproject/nubis-terraform/pull/98) ([tinnightcap](https://github.com/tinnightcap))
 - \[load\_balancer\] expose the source security group id of the ELB [\#94](https://github.com/nubisproject/nubis-terraform/pull/94) ([gozer](https://github.com/gozer))
 - Correctly name ELB security groups [\#92](https://github.com/nubisproject/nubis-terraform/pull/92) ([gozer](https://github.com/gozer))
 - \[load-balancer\] Add 'internal' variable [\#90](https://github.com/nubisproject/nubis-terraform/pull/90) ([gozer](https://github.com/gozer))
