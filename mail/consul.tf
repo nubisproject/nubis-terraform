@@ -1,5 +1,5 @@
 # Discover Consul settings
-module "mail" {
+module "consul" {
   source       = "../consul"
   region       = "${var.region}"
   environment  = "${var.environment}"
