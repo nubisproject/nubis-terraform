@@ -18,21 +18,21 @@ provider "consul" {
 resource "consul_keys" "config" {
   key {
     name   = "smtp_user"
-    path   = "${module.consul.config_prefix}/SMTP/SESUser"
+    path   = "${module.consul.config_prefix}/SMTP/User"
     value  = "${aws_iam_access_key.email.id}"
     delete = true
   }
 
   key {
     name   = "smtp_password"
-    path   = "${module.consul.config_prefix}/SMTP/SESPassword"
+    path   = "${module.consul.config_prefix}/SMTP/Password"
     value  = "${aws_iam_access_key.email.ses_smtp_password}"
     delete = true
   }
 
   key {
     name   = "smtp_host"
-    path   = "${module.consul.config_prefix}/SMTP/SESServer"
+    path   = "${module.consul.config_prefix}/SMTP/Server"
     value  = "email-smtp.${var.region}.amazonaws.com"
     delete = true
   }
