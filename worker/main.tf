@@ -238,6 +238,7 @@ data "template_file" "user_data" {
     CONSUL_ACL_TOKEN  = "${var.consul_token}"
     NUBIS_PURPOSE     = "${var.purpose}"
     NUBIS_ENVIRONMENT = "${var.environment}"
+    NUBIS_ARENA       = "${var.arena}"
     NUBIS_DOMAIN      = "${var.nubis_domain}"
     NUBIS_ACCOUNT     = "${var.account}"
     NUBIS_STACK       = "${var.service_name}-${var.environment}"
