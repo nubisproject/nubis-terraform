@@ -20,6 +20,7 @@ resource "aws_security_group" "extra" {
     Name           = "${var.service_name}-${var.environment}-${var.purpose}"
     Region         = "${var.region}"
     Environment    = "${var.environment}"
+    Arena          = "${var.arena}"
     TechnicalOwner = "${var.technical_owner}"
     Backup         = "true"
     Shutdown       = "never"
@@ -157,6 +158,12 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key                 = "Environment"
     value               = "${var.environment}"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Arena"
+    value               = "${var.arena}"
     propagate_at_launch = true
   }
 
