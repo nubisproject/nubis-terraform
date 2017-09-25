@@ -131,6 +131,7 @@ resource "aws_db_instance" "database" {
   password = "${coalesce(var.password,data.template_file.password.rendered)}"
 
   backup_retention_period = "${var.backup_retention_period}"
+  skip_final_snapshot     = true
   apply_immediately       = true
   storage_type            = "${var.storage_type}"
   db_subnet_group_name    = "${aws_db_subnet_group.database.name}"
@@ -159,6 +160,7 @@ resource "aws_db_instance" "replica" {
 
   parameter_group_name = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
   apply_immediately    = true
+  skip_final_snapshot  = true
 
   tags {
     Region         = "${var.region}"
