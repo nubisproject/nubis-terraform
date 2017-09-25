@@ -2,6 +2,7 @@ module "info" {
   source      = "../info"
   region      = "${var.region}"
   environment = "${var.environment}"
+  arena       = "${var.arena}"
   account     = "${var.account}"
 }
 
