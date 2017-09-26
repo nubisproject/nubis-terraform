@@ -17,3 +17,7 @@ variable "technical_owner" {
 variable "client_security_groups" {
   default = ""
 }
+
+variable "arena" {
+  default = "core"
+}
