@@ -10,7 +10,8 @@ before_install:
 - unzip -o terraform.zip -d $HOME/bin
 - rm -f terraform.zip
 script:
-- 'for d in */; do echo "$d: "; terraform validate $d; done'
+- 'for d in */; do terraform validate -check-variables=false $d; done'
+- 'for d in */; do terraform fmt -check=true -diff=true $d; done'
 matrix:
   fast_finish: true
 notifications:
