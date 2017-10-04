@@ -240,7 +240,6 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
-    NUBIS_STACK       = ""
     NUBIS_PROJECT     = "${var.service_name}"
     CONSUL_ACL_TOKEN  = "${var.consul_token}"
     NUBIS_PURPOSE     = "${var.purpose}"
