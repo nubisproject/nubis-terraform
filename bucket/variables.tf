@@ -26,3 +26,7 @@ variable "website_index" {
 variable "acl" {
   default = "private"
 }
+
+variable "arena" {
+  default = "core"
+}

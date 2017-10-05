@@ -20,6 +20,7 @@ resource "aws_security_group" "extra" {
     Name           = "${var.service_name}-${var.environment}-${var.purpose}"
     Region         = "${var.region}"
     Environment    = "${var.environment}"
+    Arena          = "${var.arena}"
     TechnicalOwner = "${var.technical_owner}"
     Backup         = "true"
     Shutdown       = "never"
@@ -138,7 +139,7 @@ resource "aws_autoscaling_group" "asg" {
 
   tag {
     key                 = "Name"
-    value               = "${var.service_name} (${var.purpose}) (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.environment}"
+    value               = "${var.service_name} (${var.purpose}) (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.arena}/${var.environment}"
     propagate_at_launch = true
   }
 
@@ -157,6 +158,12 @@ resource "aws_autoscaling_group" "asg" {
   tag {
     key                 = "Environment"
     value               = "${var.environment}"
+    propagate_at_launch = true
+  }
+
+  tag {
+    key                 = "Arena"
+    value               = "${var.arena}"
     propagate_at_launch = true
   }
 
@@ -233,11 +240,11 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
-    NUBIS_STACK       = ""
     NUBIS_PROJECT     = "${var.service_name}"
     CONSUL_ACL_TOKEN  = "${var.consul_token}"
     NUBIS_PURPOSE     = "${var.purpose}"
     NUBIS_ENVIRONMENT = "${var.environment}"
+    NUBIS_ARENA       = "${var.arena}"
     NUBIS_DOMAIN      = "${var.nubis_domain}"
     NUBIS_ACCOUNT     = "${var.account}"
     NUBIS_STACK       = "${var.service_name}-${var.environment}"

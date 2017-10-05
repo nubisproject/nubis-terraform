@@ -1,9 +1,9 @@
 output "address" {
-  value = "public.consul.${var.environment}.${var.region}.${var.account}.${var.nubis_domain}:443"
+  value = "localhost:8500"
 }
 
 output "scheme" {
-  value = "https"
+  value = "http"
 }
 
 output "datacenter" {

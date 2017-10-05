@@ -1,6 +1,21 @@
 # Change Log
 
-## [v1.5.1](https://github.com/nubisproject/nubis-terraform/tree/v1.5.1) (2017-08-11)
+## [v2.0.0](https://github.com/nubisproject/nubis-terraform/tree/v2.0.0) (2017-10-05)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.5.1...v2.0.0)
+
+**Closed issues:**
+
+- \[cache\] Publish information to Consul just like database [\#83](https://github.com/nubisproject/nubis-terraform/issues/83)
+
+**Merged pull requests:**
+
+- Arena Work [\#114](https://github.com/nubisproject/nubis-terraform/pull/114) ([gozer](https://github.com/gozer))
+- Udate Travis check to use Terraform v0.10.4 [\#111](https://github.com/nubisproject/nubis-terraform/pull/111) ([tinnightcap](https://github.com/tinnightcap))
+- Migrate to mozilla slack [\#110](https://github.com/nubisproject/nubis-terraform/pull/110) ([tinnightcap](https://github.com/tinnightcap))
+- Mail module consul outputs [\#108](https://github.com/nubisproject/nubis-terraform/pull/108) ([ziegeer](https://github.com/ziegeer))
+- \[cache\] Publish outputs to Consul [\#104](https://github.com/nubisproject/nubis-terraform/pull/104) ([ziegeer](https://github.com/ziegeer))
+
+## [v1.5.1](https://github.com/nubisproject/nubis-terraform/tree/v1.5.1) (2017-08-18)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.5.0...v1.5.1)
 
 **Closed issues:**
@@ -10,11 +25,14 @@
 - \[elb\] Allow creating of internal ELBs [\#89](https://github.com/nubisproject/nubis-terraform/issues/89)
 - \[worker\] Add purpose tag [\#86](https://github.com/nubisproject/nubis-terraform/issues/86)
 - \[database\] Monitor host should support nubis\_{sudo,user}\_groups [\#84](https://github.com/nubisproject/nubis-terraform/issues/84)
+- Tag v1.5.1 release [\#105](https://github.com/nubisproject/nubis-terraform/issues/105)
 - Tag v1.5.1 release [\#101](https://github.com/nubisproject/nubis-terraform/issues/101)
 - Tag v1.5.1 release [\#97](https://github.com/nubisproject/nubis-terraform/issues/97)
 
 **Merged pull requests:**
 
+- Merge v1.5.1 release into develop. \[skip ci\] [\#107](https://github.com/nubisproject/nubis-terraform/pull/107) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v1.5.1 release \[skip ci\] [\#106](https://github.com/nubisproject/nubis-terraform/pull/106) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.5.1 release into develop. \[skip ci\] [\#103](https://github.com/nubisproject/nubis-terraform/pull/103) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v1.5.1 release \[skip ci\] [\#102](https://github.com/nubisproject/nubis-terraform/pull/102) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v1.5.1 release into develop. \[skip ci\] [\#100](https://github.com/nubisproject/nubis-terraform/pull/100) ([tinnightcap](https://github.com/tinnightcap))
