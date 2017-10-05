@@ -6,9 +6,12 @@
 **Closed issues:**
 
 - \[cache\] Publish information to Consul just like database [\#83](https://github.com/nubisproject/nubis-terraform/issues/83)
+- Tag v2.0.0 release [\#115](https://github.com/nubisproject/nubis-terraform/issues/115)
 
 **Merged pull requests:**
 
+- Merge v2.0.0 release into develop. \[skip ci\] [\#117](https://github.com/nubisproject/nubis-terraform/pull/117) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#116](https://github.com/nubisproject/nubis-terraform/pull/116) ([tinnightcap](https://github.com/tinnightcap))
 - Arena Work [\#114](https://github.com/nubisproject/nubis-terraform/pull/114) ([gozer](https://github.com/gozer))
 - Udate Travis check to use Terraform v0.10.4 [\#111](https://github.com/nubisproject/nubis-terraform/pull/111) ([tinnightcap](https://github.com/tinnightcap))
 - Migrate to mozilla slack [\#110](https://github.com/nubisproject/nubis-terraform/pull/110) ([tinnightcap](https://github.com/tinnightcap))
