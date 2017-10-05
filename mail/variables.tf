@@ -9,3 +9,7 @@ variable "service_name" {}
 variable "technical_owner" {
   default = "infra-aws@mozilla.com"
 }
+
+variable "arena" {
+  default = "core"
+}

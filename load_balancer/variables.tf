@@ -63,3 +63,7 @@ variable "protocol_https" {
 variable "internal" {
   default = false
 }
+
+variable "arena" {
+  default = "core"
+}

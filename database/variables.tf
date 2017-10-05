@@ -4,6 +4,10 @@ variable "region" {}
 
 variable "environment" {}
 
+variable "arena" {
+  default = "core"
+}
+
 variable "nubis_domain" {
   default = "nubis.allizom.org"
 }
@@ -35,7 +39,7 @@ variable "replica_count" {
 }
 
 variable "instance_class" {
-  default = "db.t1.micro"
+  default = "db.t2.micro"
 }
 
 variable "name" {
