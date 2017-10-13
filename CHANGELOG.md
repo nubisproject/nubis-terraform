@@ -1,15 +1,27 @@
 # Change Log
 
+## [v2.0.1](https://github.com/nubisproject/nubis-terraform/tree/v2.0.1) (2017-10-13)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.0...v2.0.1)
+
+**Closed issues:**
+
+- \[worker\] Consider increasing health\_check\_grace\_period [\#109](https://github.com/nubisproject/nubis-terraform/issues/109)
+- Add monitoring\_security\_group to state's instance\_security\_groups [\#40](https://github.com/nubisproject/nubis-terraform/issues/40)
+- \[dns\] Consider dropping the redundant -environment in DNS entries [\#36](https://github.com/nubisproject/nubis-terraform/issues/36)
+
 ## [v2.0.0](https://github.com/nubisproject/nubis-terraform/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.5.1...v2.0.0)
 
 **Closed issues:**
 
 - \[cache\] Publish information to Consul just like database [\#83](https://github.com/nubisproject/nubis-terraform/issues/83)
+- Tag v2.0.0 release [\#118](https://github.com/nubisproject/nubis-terraform/issues/118)
 - Tag v2.0.0 release [\#115](https://github.com/nubisproject/nubis-terraform/issues/115)
 
 **Merged pull requests:**
 
+- Merge v2.0.0 release into develop. \[skip ci\] [\#120](https://github.com/nubisproject/nubis-terraform/pull/120) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.0 release \[skip ci\] [\#119](https://github.com/nubisproject/nubis-terraform/pull/119) ([tinnightcap](https://github.com/tinnightcap))
 - Merge v2.0.0 release into develop. \[skip ci\] [\#117](https://github.com/nubisproject/nubis-terraform/pull/117) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v2.0.0 release \[skip ci\] [\#116](https://github.com/nubisproject/nubis-terraform/pull/116) ([tinnightcap](https://github.com/tinnightcap))
 - Arena Work [\#114](https://github.com/nubisproject/nubis-terraform/pull/114) ([gozer](https://github.com/gozer))
