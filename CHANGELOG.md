@@ -8,6 +8,12 @@
 - \[worker\] Consider increasing health\_check\_grace\_period [\#109](https://github.com/nubisproject/nubis-terraform/issues/109)
 - Add monitoring\_security\_group to state's instance\_security\_groups [\#40](https://github.com/nubisproject/nubis-terraform/issues/40)
 - \[dns\] Consider dropping the redundant -environment in DNS entries [\#36](https://github.com/nubisproject/nubis-terraform/issues/36)
+- Tag v2.0.1 release [\#121](https://github.com/nubisproject/nubis-terraform/issues/121)
+
+**Merged pull requests:**
+
+- Merge v2.0.1 release into develop. \[skip ci\] [\#123](https://github.com/nubisproject/nubis-terraform/pull/123) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.1 release \[skip ci\] [\#122](https://github.com/nubisproject/nubis-terraform/pull/122) ([tinnightcap](https://github.com/tinnightcap))
 
 ## [v2.0.0](https://github.com/nubisproject/nubis-terraform/tree/v2.0.0) (2017-10-05)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v1.5.1...v2.0.0)
