@@ -67,3 +67,7 @@ variable "internal" {
 variable "arena" {
   default = "core"
 }
+
+variable "idle_timeout" {
+  default = "60"
+}
