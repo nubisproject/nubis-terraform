@@ -102,7 +102,7 @@ resource "aws_elb" "load_balancer" {
   }
 
   cross_zone_load_balancing   = true
-  idle_timeout                = 60
+  idle_timeout                = "${var.idle_timeout}"
   connection_draining         = true
   connection_draining_timeout = 60
   internal                    = "${var.internal}"
