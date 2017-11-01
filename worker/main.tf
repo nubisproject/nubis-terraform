@@ -135,6 +135,10 @@ resource "aws_autoscaling_group" "asg" {
     "GroupMaxSize",
     "GroupDesiredCapacity",
     "GroupInServiceInstances",
+    "GroupPendingInstances",
+    "GroupStandbyInstances",
+    "GroupTerminatingInstances",
+    "GroupTotalInstances",
   ]
 
   tag {
