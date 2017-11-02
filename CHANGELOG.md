@@ -1,5 +1,29 @@
 # Change Log
 
+## [v2.0.3](https://github.com/nubisproject/nubis-terraform/tree/v2.0.3) (2017-11-02)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.2...v2.0.3)
+
+**Closed issues:**
+
+- \[load\_balancer\] Expose knob for idle\_timeout [\#127](https://github.com/nubisproject/nubis-terraform/issues/127)
+
+**Merged pull requests:**
+
+- Add additonal metrics in worker module [\#130](https://github.com/nubisproject/nubis-terraform/pull/130) ([limed](https://github.com/limed))
+- Fixes \#127 by adding ability to configure idle\_timeout [\#128](https://github.com/nubisproject/nubis-terraform/pull/128) ([danielhartnell](https://github.com/danielhartnell))
+
+## [v2.0.2](https://github.com/nubisproject/nubis-terraform/tree/v2.0.2) (2017-10-24)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.1...v2.0.2)
+
+**Closed issues:**
+
+- Tag v2.0.2 release [\#124](https://github.com/nubisproject/nubis-terraform/issues/124)
+
+**Merged pull requests:**
+
+- Merge v2.0.2 release into develop. \[skip ci\] [\#126](https://github.com/nubisproject/nubis-terraform/pull/126) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.2 release \[skip ci\] [\#125](https://github.com/nubisproject/nubis-terraform/pull/125) ([tinnightcap](https://github.com/tinnightcap))
+
 ## [v2.0.1](https://github.com/nubisproject/nubis-terraform/tree/v2.0.1) (2017-10-13)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.0...v2.0.1)
 
