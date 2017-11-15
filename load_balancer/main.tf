@@ -120,3 +120,19 @@ resource "aws_elb" "load_balancer" {
     create_before_destroy = true
   }
 }
+
+resource "aws_lb_cookie_stickiness_policy" "load_balancer_stickiness_http" {
+  count                    = "${var.enable_session_affinity}"
+  name                     = "${var.service_name}-${var.environment}-elb-stickiness-policy-http"
+  load_balancer            = "${aws_elb.load_balancer.id}"
+  lb_port                  = 80
+  cookie_expiration_period = 600
+}
+
+resource "aws_lb_cookie_stickiness_policy" "load_balancer_stickiness_https" {
+  count                    = "${var.enable_session_affinity}"
+  name                     = "${var.service_name}-${var.environment}-elb-stickiness-policy-https"
+  load_balancer            = "${aws_elb.load_balancer.id}"
+  lb_port                  = 443
+  cookie_expiration_period = 600
+}
