@@ -71,3 +71,7 @@ variable "arena" {
 variable "idle_timeout" {
   default = "60"
 }
+
+variable "enable_session_affinity" {
+  default = false
+}
