@@ -1,10 +1,4 @@
 language: generic
-addons:
-  apt:
-    sources:
-    - debian-sid
-    packages:
-    - libssl1.0.0
 before_install:
 - wget --debug --no-check-certificate -v -O terraform.zip "https://releases.hashicorp.com/terraform/0.10.5/terraform_0.10.5_linux_amd64.zip"
 - unzip -o terraform.zip -d $HOME/bin
