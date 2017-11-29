@@ -204,7 +204,7 @@ resource "aws_iam_instance_profile" "extra" {
   # Create only if instance_profile isn't set
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2)}"
 
-  name  = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
   role = ["${coalesce(var.role, aws_iam_role.extra.name)}"]
 
   lifecycle {
