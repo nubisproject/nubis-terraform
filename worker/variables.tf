@@ -75,7 +75,7 @@ variable "health_check_type" {
 }
 
 variable "health_check_grace_period" {
-  default = "300"
+  default = "600"
 }
 
 variable "elb" {
