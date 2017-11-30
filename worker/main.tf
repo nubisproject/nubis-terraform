@@ -128,7 +128,9 @@ resource "aws_autoscaling_group" "asg" {
   ]
 
   wait_for_capacity_timeout = "${var.wait_for_capacity_timeout}"
-  wait_for_elb_capacity     = "${signum(length(var.elb)) * var.min_instances}"
+
+  # Only wait if health_check_type is ELB
+  wait_for_elb_capacity = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb)))) == "ELB" ? var.min_instances : 0}"
 
   enabled_metrics = [
     "GroupMinSize",
