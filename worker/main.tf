@@ -207,7 +207,7 @@ resource "aws_iam_instance_profile" "extra" {
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2)}"
 
   name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
-  role = ["${coalesce(var.role, aws_iam_role.extra.name)}"]
+  role = "${coalesce(var.role, aws_iam_role.extra.name)}"
 
   lifecycle {
     create_before_destroy = true
