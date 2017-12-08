@@ -1,14 +1,33 @@
 # Change Log
 
+## [v2.0.4](https://github.com/nubisproject/nubis-terraform/tree/v2.0.4) (2017-12-08)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.3...v2.0.4)
+
+**Closed issues:**
+
+- \[worker\] aws\_iam\_instance\_profile roles should now be just role [\#139](https://github.com/nubisproject/nubis-terraform/issues/139)
+- \[worker\] Consider raising the ASG health\_check\_grace\_period [\#88](https://github.com/nubisproject/nubis-terraform/issues/88)
+- \[worker\] Setting health\_check\_type="EC2" when using an elb should disable wait\_for\_elb\_capacity [\#55](https://github.com/nubisproject/nubis-terraform/issues/55)
+
+**Merged pull requests:**
+
+- Followup fix, role shouldn't be a list anymore [\#144](https://github.com/nubisproject/nubis-terraform/pull/144) ([gozer](https://github.com/gozer))
+- Don't wait for ELB health status when not using ELB for health checking [\#143](https://github.com/nubisproject/nubis-terraform/pull/143) ([gozer](https://github.com/gozer))
+- Only one role is supported ever [\#142](https://github.com/nubisproject/nubis-terraform/pull/142) ([gozer](https://github.com/gozer))
+- \[worker\] health\_check\_grace\_period default to 10 minutes [\#141](https://github.com/nubisproject/nubis-terraform/pull/141) ([gozer](https://github.com/gozer))
+
 ## [v2.0.3](https://github.com/nubisproject/nubis-terraform/tree/v2.0.3) (2017-11-02)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.2...v2.0.3)
 
 **Closed issues:**
 
 - \[load\_balancer\] Expose knob for idle\_timeout [\#127](https://github.com/nubisproject/nubis-terraform/issues/127)
+- Tag v2.0.3 release [\#131](https://github.com/nubisproject/nubis-terraform/issues/131)
 
 **Merged pull requests:**
 
+- Merge v2.0.3 release into develop. \[skip ci\] [\#133](https://github.com/nubisproject/nubis-terraform/pull/133) ([tinnightcap](https://github.com/tinnightcap))
+- Update CHANGELOG for v2.0.3 release \[skip ci\] [\#132](https://github.com/nubisproject/nubis-terraform/pull/132) ([tinnightcap](https://github.com/tinnightcap))
 - Add additonal metrics in worker module [\#130](https://github.com/nubisproject/nubis-terraform/pull/130) ([limed](https://github.com/limed))
 - Fixes \#127 by adding ability to configure idle\_timeout [\#128](https://github.com/nubisproject/nubis-terraform/pull/128) ([danielhartnell](https://github.com/danielhartnell))
 
