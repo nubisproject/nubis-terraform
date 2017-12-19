@@ -143,59 +143,20 @@ resource "aws_autoscaling_group" "asg" {
     "GroupTotalInstances",
   ]
 
-  tag {
-    key                 = "Name"
-    value               = "${var.service_name} (${var.purpose}) (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.arena}/${var.environment}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "ServiceName"
-    value               = "${var.service_name}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Region"
-    value               = "${var.region}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Environment"
-    value               = "${var.environment}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Arena"
-    value               = "${var.arena}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "TechnicalOwner"
-    value               = "${var.technical_owner}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Purpose"
-    value               = "${var.purpose}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Shutdown"
-    value               = "never"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Backup"
-    value               = "true"
-    propagate_at_launch = true
-  }
+  tags = ["${concat(
+    list(
+      map("key", "Name", "value", "${var.service_name} (${var.purpose}) (${coalesce(var.nubis_version, module.info.nubis_version)}) for ${var.account} in ${var.arena}/${var.environment}", "propagate_at_launch", true),
+      map("key", "ServiceName", "value", "${var.service_name}", "propagate_at_launch", true),
+      map("key", "Region", "value", "${var.region}", "propagate_at_launch", true),
+      map("key", "Environment", "value", "${var.environment}", "propagate_at_launch", true),
+      map("key", "Arena", "value", "${var.arena}", "propagate_at_launch", true),
+      map("key", "TechnicalOwner", "value", "${var.technical_owner}", "propagate_at_launch", true),
+      map("key", "Purpose", "value", "${var.purpose}", "propagate_at_launch", true),
+      map("key", "Shutdown", "value", "never", "propagate_at_launch", true),
+      map("key", "Backup", "value", "true", "propagate_at_launch", true),
+    ),
+    var.tags)
+  }"]
 
   lifecycle {
     create_before_destroy = true
