@@ -121,3 +121,8 @@ variable "root_storage_size" {
 variable "public" {
   default = false
 }
+
+variable "tags" {
+  type    = "list"
+  default = []
+}
