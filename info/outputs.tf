@@ -2,6 +2,10 @@ output "account_id" {
   value = "${data.terraform_remote_state.info.account_id}"
 }
 
+output "arena" {
+  value = "${data.terraform_remote_state.info.arena}"
+}
+
 output "availability_zones" {
   value = "${data.terraform_remote_state.info.availability_zones}"
 }
