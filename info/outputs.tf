@@ -61,3 +61,15 @@ output "rds_mysql_parameter_group" {
 output "access_logging_bucket" {
   value = "${data.terraform_remote_state.info.access_logging_bucket}"
 }
+
+output "network_cidr" {
+  value = "${data.terraform_remote_state.info.network_cidr}"
+}
+
+output "private_network_cidr" {
+  value = "${data.terraform_remote_state.info.private_network_cidr}"
+}
+
+output "public_network_cidr" {
+  value = "${data.terraform_remote_state.info.public_network_cidr}"
+}
