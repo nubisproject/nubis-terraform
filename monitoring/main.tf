@@ -1,21 +1,21 @@
 resource "nrs_monitor" "monitor" {
-  name = "${var.account}-${var.service_name}-${var.environment}"
+  name = "${var.account}-${var.arena}-${var.region}-${var.service_name}-${var.environment}"
 
   // The monitor's checking frequency in minutes (one of 1, 5, 10,
   // 15, 30, 60, 360, 720, or 1440).
-  frequency = 60
+  frequency = "${var.frequency}"
 
   // The monitoring locations. A list can be found at the endpoint:
   // https://synthetics.newrelic.com/synthetics/api/v1/locations
-  locations = ["AWS_US_WEST_1", "LINODE_US_SOUTH_1"]
+  locations = "${var.locations}"
 
-  status = "ENABLED"
+  status = "${var.status}"
 
   // The type of monitor (one of SIMPLE, BROWSER, SCRIPT_API,
   // SCRIPT_BROWSER)
-  type = "SCRIPT_BROWSER"
+  type = "${var.type}"
 
-  sla_threshold = 1
+  sla_threshold = "${var.sla_treshold}"
 
   // The URI to check. This only applies to SIMPLE and BROWSER
   // monitors.
@@ -24,11 +24,13 @@ resource "nrs_monitor" "monitor" {
   // The API or browser script to execute. This only applies to
   // SCRIPT_API or SCRIPT_BROWSER monitors. Docs can be found here:
   // https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers
-  script = <<EOF
-  var site_url = "${var.url}"
+  script = "${data.template_file.script.rendered}"
+}
 
-  console.log('running test for ' + site_url + ' in ' + $env.LOCATION);
+data "template_file" "script" {
+  template = "${var.script_template}"
 
-  $browser.get(site_url);
-EOF
+  vars {
+    URL = "${var.url}"
+  }
 }
