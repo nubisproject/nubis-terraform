@@ -28,7 +28,7 @@ resource "nrs_monitor" "monitor" {
 }
 
 data "template_file" "script" {
-  template = "var site_url = '$${URL}';\n${var.script_template}"
+  template = "${file(var.script_template)}"
 
   vars {
     URL = "${var.url}"

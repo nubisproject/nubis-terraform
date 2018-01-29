@@ -56,11 +56,5 @@ variable "locations" {
 }
 
 variable "script_template" {
-  default = <<EOF
-// Simplest browser test, just load the home page and call it good \
-
-console.log('running test for ' + site_url + ' in ' + $env.LOCATION);
-
-$browser.get(site_url);
-EOF
+  default = "${path.module}/templates/script.tpl"
 }
