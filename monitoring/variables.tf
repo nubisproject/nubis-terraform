@@ -56,5 +56,5 @@ variable "locations" {
 }
 
 variable "script_template" {
-  default = "${path.module}/templates/script.tpl"
+  default = ""
 }

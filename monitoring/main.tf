@@ -28,7 +28,7 @@ resource "nrs_monitor" "monitor" {
 }
 
 data "template_file" "script" {
-  template = "${file(var.script_template)}"
+  template = "${file(coalesce(var.script_template, "${path.module}/templates/script.tpl"))}"
 
   vars {
     URL = "${var.url}"
