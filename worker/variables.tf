@@ -122,6 +122,10 @@ variable "public" {
   default = false
 }
 
+variable "swap_size_meg" {
+  default = ""
+}
+
 variable "tags" {
   type    = "list"
   default = []
