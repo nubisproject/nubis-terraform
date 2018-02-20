@@ -207,16 +207,17 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
-    NUBIS_PROJECT     = "${var.service_name}"
-    CONSUL_ACL_TOKEN  = "${var.consul_token}"
-    NUBIS_PURPOSE     = "${var.purpose}"
-    NUBIS_ENVIRONMENT = "${var.environment}"
-    NUBIS_ARENA       = "${var.arena}"
-    NUBIS_DOMAIN      = "${var.nubis_domain}"
-    NUBIS_ACCOUNT     = "${var.account}"
-    NUBIS_STACK       = "${var.service_name}-${var.environment}"
-    NUBIS_SUDO_GROUPS = "${var.nubis_sudo_groups}"
-    NUBIS_USER_GROUPS = "${var.nubis_user_groups}"
+    NUBIS_PROJECT       = "${var.service_name}"
+    CONSUL_ACL_TOKEN    = "${var.consul_token}"
+    NUBIS_PURPOSE       = "${var.purpose}"
+    NUBIS_ENVIRONMENT   = "${var.environment}"
+    NUBIS_ARENA         = "${var.arena}"
+    NUBIS_DOMAIN        = "${var.nubis_domain}"
+    NUBIS_ACCOUNT       = "${var.account}"
+    NUBIS_STACK         = "${var.service_name}-${var.environment}"
+    NUBIS_SUDO_GROUPS   = "${var.nubis_sudo_groups}"
+    NUBIS_USER_GROUPS   = "${var.nubis_user_groups}"
+    NUBIS_SWAP_SIZE_MEG = "${var.swap_size_meg}"
   }
 }
 
