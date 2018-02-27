@@ -2,7 +2,7 @@
 
 ## Example Usage
 
-```
+```toml
 module "monitoring" {
   source       = "github.com/gozer/nubis-terraform//monitoring?ref=issue%2F151%2Fnrs"
   region       = "${var.region}"
@@ -28,15 +28,15 @@ All arguments are optionnal execpt for the url to check
 
 Check interval in minutes, allowed values:
 
- - 1
- - 5
- - 10
- - 15
- - 30
- - 60
- - 360
- - 720
- - 1440
+- 1
+- 5
+- 10
+- 15
+- 30
+- 60
+- 360
+- 720
+- 1440
 
 ### sla_treshold
 
@@ -46,17 +46,17 @@ Treshold for SLA monitoring in seconds
 
 The enabled status of the checks
 
- - ENABLED
- - DISABLED
+- ENABLED
+- DISABLED
 
 ### type
 
 Type of check. Allowed values:
 
- - SCRIPT_BROWSER (default)
- - SIMPLE
- - BROWSER
- - SCRIPT_API
+- SCRIPT_BROWSER (default)
+- SIMPLE
+- BROWSER
+- SCRIPT_API
 
 ### locations
 
