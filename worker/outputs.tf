@@ -14,3 +14,7 @@ output "role" {
 output "autoscaling_group" {
   value = "${aws_autoscaling_group.asg.id}"
 }
+
+output "autoscaling_group_arn" {
+  value = "${aws_autoscaling_group.asg.arn}"
+}

@@ -126,6 +126,10 @@ variable "swap_size_meg" {
   default = ""
 }
 
+variable "az_index" {
+  default = "-1"
+}
+
 variable "tags" {
   type    = "list"
   default = []
