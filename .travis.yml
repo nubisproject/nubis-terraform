@@ -1,13 +1,16 @@
-language: generic
+sudo: required
+
+language: ruby
+
+services:
+  - docker
+
 before_install:
-- wget --debug --no-check-certificate -v -O terraform.zip "https://releases.hashicorp.com/terraform/0.10.5/terraform_0.10.5_linux_amd64.zip"
-- unzip -o terraform.zip -d $HOME/bin
-- rm -f terraform.zip
+  - docker pull nubisproject/nubis-travis:master
+
 script:
-- 'for d in */; do terraform validate -check-variables=false $d; done'
-- 'for d in */; do terraform fmt -check=true -diff=true $d; done'
-matrix:
-  fast_finish: true
+  - docker run --mount type=bind,source="$(pwd)",target=/nubis/files nubisproject/nubis-travis:master
+
 notifications:
   slack:
     secure: DN1r3MlwW0QXtw0F1fEOlzeIPMGbNdwlzB7C6N+JQ4rakpNOm4/EaMPktDnhzXB9vUx/CCHAlQtehwBLxAbVaYRi7YwE92pmOPb4QeMZ9kawXnHGByKrCjk60Za4mHZHLlMqVvezA/yHcP9qXCDyCEENcby2Wt1AAwlcJp5qdCUJCV8AttpMdcD8pB96QDyVi956e4cXnnciz7DfibfxpJTRir2Ct8lVrqOdFAqLqEx0gQL84NggSxsjlwJfJDUHaTR66T2gocpDBHqxgj8MPgoN0Joz1uFqKO0kaO5am/5hAOIdshxPQhHLU9cJ29+Sxut70H1vq/fg6oIl6kuuqeWBGYPFnImvQyieXb+gg8vlwCdi09DT+K+1NTQfXk2wEM7vZbJJTXQdFA+r45+ot5jUatslyW3wmNM88MkPn769rYMjeQtbt3Euc9YGEg5ElNP9mRa5+pmglJE/C6NHAt4XaBphSDcXlBd/zRw/u3QMMtLfV+WYJQTEBugpNrpXik8xOOV1d7AIJM1uqmS46J5Wak4j1/1VD8zWHwBJ9kcUeRtp9YRtZVtVlcC3kPzwRzdN1JpHzAURpHgwGw10M5Cl06o1t/bbzNjGyrzkhtHdDxTnbTos8+nzvM/7NJ7qW/H0uI8hnoxj5OYmMKZbOc6pY8/vSR8Syy6RsbGonkg=
