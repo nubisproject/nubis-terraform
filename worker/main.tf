@@ -125,7 +125,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
-    "${split(",", var.az_index >= 0 ? element(split(",",local.vpc_zone_identifier), abs(var.az_index) ) : local.vpc_zone_identifier)}"
+    "${split(",", var.az_index >= 0 ? element(split(",",local.vpc_zone_identifier), abs(var.az_index) ) : local.vpc_zone_identifier)}",
   ]
 
   load_balancers = [
