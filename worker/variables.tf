@@ -118,6 +118,10 @@ variable "root_storage_size" {
   default = "0"
 }
 
+variable "root_storage_type" {
+  default = "standard"
+}
+
 variable "public" {
   default = false
 }

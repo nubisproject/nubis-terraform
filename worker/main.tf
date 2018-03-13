@@ -89,6 +89,7 @@ resource "aws_launch_configuration" "launch_config" {
 
   root_block_device = {
     volume_size           = "${var.root_storage_size}"
+    volume_type           = "${var.root_storage_type}"
     delete_on_termination = true
   }
 
