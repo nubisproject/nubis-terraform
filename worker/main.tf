@@ -64,7 +64,7 @@ resource "aws_security_group" "extra" {
 
 resource "aws_launch_configuration" "launch_config" {
   count       = "${var.enabled}"
-  name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-"
+  name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}"
 
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
@@ -82,7 +82,7 @@ resource "aws_launch_configuration" "launch_config" {
   security_groups = [
     "${split(",", module.info.instance_security_groups)}",
     "${compact(list(var.monitoring ? module.info.monitoring_security_group : "" )) }",
-    "${element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0)}",
+    "${split(",",element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0))}",
   ]
 
   user_data = "${data.template_file.user_data.rendered}"
@@ -108,9 +108,14 @@ variable "health_check_type_map" {
   }
 }
 
+locals {
+  vpc_zone_identifier = "${var.public ? module.info.public_subnets : module.info.private_subnets}"
+  az_index_identifier = "${var.az_index < 0 ? "" : "az${var.az_index}-"}"
+}
+
 resource "aws_autoscaling_group" "asg" {
   count                = "${var.enabled}"
-  name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
+  name                 = "${var.service_name}-${var.environment}-${var.region}-${local.az_index_identifier}asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
   max_size             = "${coalesce(var.max_instances, 1 + (4*var.min_instances) )}"
   min_size             = "${var.min_instances}"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
@@ -121,7 +126,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
-    "${split(",",var.public ? module.info.public_subnets : module.info.private_subnets)}",
+    "${split(",", var.az_index >= 0 ? element(split(",",local.vpc_zone_identifier), abs(var.az_index) ) : local.vpc_zone_identifier)}",
   ]
 
   load_balancers = [
@@ -168,7 +173,7 @@ resource "aws_iam_instance_profile" "extra" {
   # Create only if instance_profile isn't set
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2)}"
 
-  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}profile"
   role = "${coalesce(var.role, aws_iam_role.extra.name)}"
 
   lifecycle {
@@ -180,7 +185,7 @@ resource "aws_iam_role" "extra" {
   # Create only if instance_profile isn't set and role isn't set
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2) * ( signum(length(var.role)) + 1 % 2 ) }"
 
-  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-role"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}role"
 
   assume_role_policy = <<EOF
 {
