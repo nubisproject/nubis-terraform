@@ -122,6 +122,10 @@ variable "root_storage_type" {
   default = "standard"
 }
 
+variable "storage_encrypted_at_rest" {
+  default = false
+}
+
 variable "public" {
   default = false
 }
