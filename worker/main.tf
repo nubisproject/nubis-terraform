@@ -114,7 +114,7 @@ variable "health_check_type_map" {
 locals {
   vpc_zone_identifier = "${var.public ? module.info.public_subnets : module.info.private_subnets}"
   az_index_identifier = "${var.az_index < 0 ? "" : "az${var.az_index}-"}"
-  data_volume = "${list(list(), list(map("device_name", var.data_storage_device, "volume_size", var.data_storage_size, "volume_type", var.data_storage_type)))}"
+  data_volume         = "${list(list(), list(map("device_name", var.data_storage_device, "volume_size", var.data_storage_size, "volume_type", var.data_storage_type)))}"
 }
 
 resource "aws_autoscaling_group" "asg" {
