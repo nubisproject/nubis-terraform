@@ -91,7 +91,6 @@ resource "aws_launch_configuration" "launch_config" {
     volume_size           = "${var.root_storage_size}"
     volume_type           = "${var.root_storage_type}"
     delete_on_termination = true
-    encrypted             = "${var.storage_encrypted_at_rest}"
   }
 
   ebs_block_device = "${local.data_volume[var.data_storage_size <= 0 ? 0 : 1]}"
@@ -114,7 +113,7 @@ variable "health_check_type_map" {
 locals {
   vpc_zone_identifier = "${var.public ? module.info.public_subnets : module.info.private_subnets}"
   az_index_identifier = "${var.az_index < 0 ? "" : "az${var.az_index}-"}"
-  data_volume         = "${list(list(), list(map("device_name", var.data_storage_device, "volume_size", var.data_storage_size, "volume_type", var.data_storage_type)))}"
+  data_volume         = "${list(list(), list(map("device_name", var.data_storage_device, "volume_size", var.data_storage_size, "volume_type", var.data_storage_type, "encrypted", var.storage_encrypted_at_rest)))}"
 }
 
 resource "aws_autoscaling_group" "asg" {
