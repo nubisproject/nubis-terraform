@@ -1,6 +1,6 @@
 provider "aws" {
   version = "~> 0.1"
-  region = "${var.region}"
+  region  = "${var.region}"
 }
 
 data "aws_ami" "image" {
