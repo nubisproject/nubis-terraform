@@ -64,7 +64,7 @@ resource "aws_security_group" "extra" {
 
 resource "aws_launch_configuration" "launch_config" {
   count       = "${var.enabled}"
-  name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-"
+  name_prefix = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}"
 
   image_id      = "${var.ami}"
   instance_type = "${var.instance_type}"
@@ -82,15 +82,18 @@ resource "aws_launch_configuration" "launch_config" {
   security_groups = [
     "${split(",", module.info.instance_security_groups)}",
     "${compact(list(var.monitoring ? module.info.monitoring_security_group : "" )) }",
-    "${element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0)}",
+    "${split(",",element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0))}",
   ]
 
   user_data = "${data.template_file.user_data.rendered}"
 
   root_block_device = {
     volume_size           = "${var.root_storage_size}"
+    volume_type           = "${var.root_storage_type}"
     delete_on_termination = true
   }
+
+  ebs_block_device = "${local.data_volume[var.data_storage_size <= 0 ? 0 : 1]}"
 
   lifecycle {
     create_before_destroy = true
@@ -107,9 +110,15 @@ variable "health_check_type_map" {
   }
 }
 
+locals {
+  vpc_zone_identifier = "${var.public ? module.info.public_subnets : module.info.private_subnets}"
+  az_index_identifier = "${var.az_index < 0 ? "" : "az${var.az_index}-"}"
+  data_volume         = "${list(list(), list(map("device_name", var.data_storage_device, "volume_size", var.data_storage_size, "volume_type", var.data_storage_type, "encrypted", var.storage_encrypted_at_rest)))}"
+}
+
 resource "aws_autoscaling_group" "asg" {
   count                = "${var.enabled}"
-  name                 = "${var.service_name}-${var.environment}-${var.region}-asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
+  name                 = "${var.service_name}-${var.environment}-${var.region}-${local.az_index_identifier}asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
   max_size             = "${coalesce(var.max_instances, 1 + (4*var.min_instances) )}"
   min_size             = "${var.min_instances}"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
@@ -120,7 +129,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_type = "${coalesce(var.health_check_type, lookup(var.health_check_type_map, signum(length(var.elb))))}"
 
   vpc_zone_identifier = [
-    "${split(",",var.public ? module.info.public_subnets : module.info.private_subnets)}",
+    "${split(",", var.az_index >= 0 ? element(split(",",local.vpc_zone_identifier), abs(var.az_index) ) : local.vpc_zone_identifier)}",
   ]
 
   load_balancers = [
@@ -167,7 +176,7 @@ resource "aws_iam_instance_profile" "extra" {
   # Create only if instance_profile isn't set
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2)}"
 
-  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-profile"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}profile"
   role = "${coalesce(var.role, aws_iam_role.extra.name)}"
 
   lifecycle {
@@ -179,7 +188,7 @@ resource "aws_iam_role" "extra" {
   # Create only if instance_profile isn't set and role isn't set
   count = "${var.enabled * (signum(length(var.instance_profile)) + 1 % 2) * ( signum(length(var.role)) + 1 % 2 ) }"
 
-  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-role"
+  name = "${var.service_name}-${var.environment}-${var.region}-${var.purpose}-${local.az_index_identifier}role"
 
   assume_role_policy = <<EOF
 {
@@ -207,16 +216,17 @@ data "template_file" "user_data" {
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
   vars {
-    NUBIS_PROJECT     = "${var.service_name}"
-    CONSUL_ACL_TOKEN  = "${var.consul_token}"
-    NUBIS_PURPOSE     = "${var.purpose}"
-    NUBIS_ENVIRONMENT = "${var.environment}"
-    NUBIS_ARENA       = "${var.arena}"
-    NUBIS_DOMAIN      = "${var.nubis_domain}"
-    NUBIS_ACCOUNT     = "${var.account}"
-    NUBIS_STACK       = "${var.service_name}-${var.environment}"
-    NUBIS_SUDO_GROUPS = "${var.nubis_sudo_groups}"
-    NUBIS_USER_GROUPS = "${var.nubis_user_groups}"
+    NUBIS_PROJECT       = "${var.service_name}"
+    CONSUL_ACL_TOKEN    = "${var.consul_token}"
+    NUBIS_PURPOSE       = "${var.purpose}"
+    NUBIS_ENVIRONMENT   = "${var.environment}"
+    NUBIS_ARENA         = "${var.arena}"
+    NUBIS_DOMAIN        = "${var.nubis_domain}"
+    NUBIS_ACCOUNT       = "${var.account}"
+    NUBIS_STACK         = "${var.service_name}-${var.environment}"
+    NUBIS_SUDO_GROUPS   = "${var.nubis_sudo_groups}"
+    NUBIS_USER_GROUPS   = "${var.nubis_user_groups}"
+    NUBIS_SWAP_SIZE_MEG = "${var.swap_size_meg}"
   }
 }
 

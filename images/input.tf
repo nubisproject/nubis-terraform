@@ -2,7 +2,7 @@ variable "region" {}
 
 variable "project" {}
 
-variable "version" {}
+variable "image_version" {}
 
 variable "os" {
   default = "*"

@@ -118,8 +118,36 @@ variable "root_storage_size" {
   default = "0"
 }
 
+variable "root_storage_type" {
+  default = "standard"
+}
+
+variable "data_storage_size" {
+  default = "0"
+}
+
+variable "data_storage_type" {
+  default = "standard"
+}
+
+variable "data_storage_device" {
+  default = "/dev/xvdf"
+}
+
+variable "storage_encrypted_at_rest" {
+  default = false
+}
+
 variable "public" {
   default = false
+}
+
+variable "swap_size_meg" {
+  default = ""
+}
+
+variable "az_index" {
+  default = "-1"
 }
 
 variable "tags" {
