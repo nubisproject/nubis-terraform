@@ -1,5 +1,27 @@
 # Change Log
 
+## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-06)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.1.0...v2.2.0)
+
+**Closed issues:**
+
+- \[worker\] Support additional disks/volumes [\#167](https://github.com/nubisproject/nubis-terraform/issues/167)
+- \[worker\] Support Encrypted-at-rest EBS volumes [\#165](https://github.com/nubisproject/nubis-terraform/issues/165)
+- \[worker\] Allow specifying AZs [\#160](https://github.com/nubisproject/nubis-terraform/issues/160)
+- \[worker\] Add tunable for root volume type [\#159](https://github.com/nubisproject/nubis-terraform/issues/159)
+- \[worker\] Expose tunable for swap size [\#157](https://github.com/nubisproject/nubis-terraform/issues/157)
+
+**Merged pull requests:**
+
+- version is a reserved TF module argument, rename to image\_version [\#170](https://github.com/nubisproject/nubis-terraform/pull/170) ([gozer](https://github.com/gozer))
+- Root volume doesn't support encryption at run-time [\#169](https://github.com/nubisproject/nubis-terraform/pull/169) ([gozer](https://github.com/gozer))
+- \[worker\] Support the addition of an extra data volume [\#168](https://github.com/nubisproject/nubis-terraform/pull/168) ([gozer](https://github.com/gozer))
+- \[worker\] Add support for EBS at-rest encryption [\#166](https://github.com/nubisproject/nubis-terraform/pull/166) ([gozer](https://github.com/gozer))
+- \[worker\] Add root\_storage\_type tunable, defaults to standard [\#164](https://github.com/nubisproject/nubis-terraform/pull/164) ([gozer](https://github.com/gozer))
+- \[worker\] Allow pinning an ASG to a single AZ [\#163](https://github.com/nubisproject/nubis-terraform/pull/163) ([gozer](https://github.com/gozer))
+- Use nubis-travis for lint checks [\#161](https://github.com/nubisproject/nubis-terraform/pull/161) ([tinnightcap](https://github.com/tinnightcap))
+- \[worker\] Add swap\_size\_meg option, defaults to platform default [\#158](https://github.com/nubisproject/nubis-terraform/pull/158) ([gozer](https://github.com/gozer))
+
 ## [v2.1.0](https://github.com/nubisproject/nubis-terraform/tree/v2.1.0) (2018-02-02)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.0.4...v2.1.0)
 
@@ -8,9 +30,14 @@
 - Add Newrelic Synthetic support [\#151](https://github.com/nubisproject/nubis-terraform/issues/151)
 - \[info\] Expose network CIDRs [\#148](https://github.com/nubisproject/nubis-terraform/issues/148)
 - \[worker\] Support Additional tags for the ASG [\#146](https://github.com/nubisproject/nubis-terraform/issues/146)
+- Tag v2.1.0 release [\#154](https://github.com/nubisproject/nubis-terraform/issues/154)
+- \[worker\] Consider raising the ASG health\_check\_grace\_period [\#88](https://github.com/nubisproject/nubis-terraform/issues/88)
+- \[worker\] Setting health\_check\_type="EC2" when using an elb should disable wait\_for\_elb\_capacity [\#55](https://github.com/nubisproject/nubis-terraform/issues/55)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#156](https://github.com/nubisproject/nubis-terraform/pull/156) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.1.0 release \[skip ci\] [\#155](https://github.com/nubisproject/nubis-terraform/pull/155) ([nubis-automation](https://github.com/nubis-automation))
 - doc++ [\#153](https://github.com/nubisproject/nubis-terraform/pull/153) ([gozer](https://github.com/gozer))
 - Add initial support for external monitoring with NewRelic Synthetic [\#152](https://github.com/nubisproject/nubis-terraform/pull/152) ([gozer](https://github.com/gozer))
 - Expose arena [\#150](https://github.com/nubisproject/nubis-terraform/pull/150) ([gozer](https://github.com/gozer))
@@ -23,8 +50,6 @@
 **Closed issues:**
 
 - \[worker\] aws\_iam\_instance\_profile roles should now be just role [\#139](https://github.com/nubisproject/nubis-terraform/issues/139)
-- \[worker\] Consider raising the ASG health\_check\_grace\_period [\#88](https://github.com/nubisproject/nubis-terraform/issues/88)
-- \[worker\] Setting health\_check\_type="EC2" when using an elb should disable wait\_for\_elb\_capacity [\#55](https://github.com/nubisproject/nubis-terraform/issues/55)
 - Tag v2.0.4 release [\#145](https://github.com/nubisproject/nubis-terraform/issues/145)
 
 **Merged pull requests:**
