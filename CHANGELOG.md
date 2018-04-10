@@ -1,5 +1,16 @@
 # Change Log
 
+## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-10)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.2.0)
+
+**Closed issues:**
+
+- \[database\] Use the new image\_version argument to the image module [\#175](https://github.com/nubisproject/nubis-terraform/issues/175)
+
+**Merged pull requests:**
+
+- Update to use image\_version [\#176](https://github.com/nubisproject/nubis-terraform/pull/176) ([gozer](https://github.com/gozer))
+
 ## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-06)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.1.0...v2.2.0)
 
@@ -10,9 +21,12 @@
 - \[worker\] Allow specifying AZs [\#160](https://github.com/nubisproject/nubis-terraform/issues/160)
 - \[worker\] Add tunable for root volume type [\#159](https://github.com/nubisproject/nubis-terraform/issues/159)
 - \[worker\] Expose tunable for swap size [\#157](https://github.com/nubisproject/nubis-terraform/issues/157)
+- Tag v2.2.0 release [\#171](https://github.com/nubisproject/nubis-terraform/issues/171)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#173](https://github.com/nubisproject/nubis-terraform/pull/173) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#172](https://github.com/nubisproject/nubis-terraform/pull/172) ([nubis-automation](https://github.com/nubis-automation))
 - version is a reserved TF module argument, rename to image\_version [\#170](https://github.com/nubisproject/nubis-terraform/pull/170) ([gozer](https://github.com/gozer))
 - Root volume doesn't support encryption at run-time [\#169](https://github.com/nubisproject/nubis-terraform/pull/169) ([gozer](https://github.com/gozer))
 - \[worker\] Support the addition of an extra data volume [\#168](https://github.com/nubisproject/nubis-terraform/pull/168) ([gozer](https://github.com/gozer))
