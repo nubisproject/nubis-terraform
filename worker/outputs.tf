@@ -12,9 +12,9 @@ output "role" {
 }
 
 output "autoscaling_group" {
-  value = "${aws_autoscaling_group.asg.id}"
+  value = "${element(concat(aws_autoscaling_group.asg.*.id, list("")),0)}"
 }
 
 output "autoscaling_group_arn" {
-  value = "${aws_autoscaling_group.asg.arn}"
+  value = "${element(concat(aws_autoscaling_group.asg.*.arn, list("")),0)}"
 }

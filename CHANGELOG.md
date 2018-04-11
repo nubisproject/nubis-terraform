@@ -1,30 +1,32 @@
 # Change Log
 
-## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-10)
+## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-11)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.2.0)
-
-**Closed issues:**
-
-- \[database\] Use the new image\_version argument to the image module [\#175](https://github.com/nubisproject/nubis-terraform/issues/175)
 
 **Merged pull requests:**
 
-- Update to use image\_version [\#176](https://github.com/nubisproject/nubis-terraform/pull/176) ([gozer](https://github.com/gozer))
+- fix typo [\#182](https://github.com/nubisproject/nubis-terraform/pull/182) ([gozer](https://github.com/gozer))
+- \[worker\] Slience some TF 0.11 warnings [\#181](https://github.com/nubisproject/nubis-terraform/pull/181) ([gozer](https://github.com/gozer))
 
-## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-06)
+## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-10)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.1.0...v2.2.0)
 
 **Closed issues:**
 
+- \[database\] Use the new image\_version argument to the image module [\#175](https://github.com/nubisproject/nubis-terraform/issues/175)
 - \[worker\] Support additional disks/volumes [\#167](https://github.com/nubisproject/nubis-terraform/issues/167)
 - \[worker\] Support Encrypted-at-rest EBS volumes [\#165](https://github.com/nubisproject/nubis-terraform/issues/165)
 - \[worker\] Allow specifying AZs [\#160](https://github.com/nubisproject/nubis-terraform/issues/160)
 - \[worker\] Add tunable for root volume type [\#159](https://github.com/nubisproject/nubis-terraform/issues/159)
 - \[worker\] Expose tunable for swap size [\#157](https://github.com/nubisproject/nubis-terraform/issues/157)
+- Tag v2.2.0 release [\#177](https://github.com/nubisproject/nubis-terraform/issues/177)
 - Tag v2.2.0 release [\#171](https://github.com/nubisproject/nubis-terraform/issues/171)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#179](https://github.com/nubisproject/nubis-terraform/pull/179) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#178](https://github.com/nubisproject/nubis-terraform/pull/178) ([nubis-automation](https://github.com/nubis-automation))
+- Update to use image\_version [\#176](https://github.com/nubisproject/nubis-terraform/pull/176) ([gozer](https://github.com/gozer))
 - Update CHANGELOG for v2.2.0 release \[skip ci\] [\#173](https://github.com/nubisproject/nubis-terraform/pull/173) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.2.0 release \[skip ci\] [\#172](https://github.com/nubisproject/nubis-terraform/pull/172) ([nubis-automation](https://github.com/nubis-automation))
 - version is a reserved TF module argument, rename to image\_version [\#170](https://github.com/nubisproject/nubis-terraform/pull/170) ([gozer](https://github.com/gozer))
