@@ -1,10 +1,3 @@
-module "info" {
-  source      = "../info"
-  region      = "${var.region}"
-  environment = "${var.environment}"
-  account     = "${var.account}"
-}
-
 provider "aws" {
   region = "${var.region}"
 }
