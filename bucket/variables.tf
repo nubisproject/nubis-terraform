@@ -30,3 +30,7 @@ variable "acl" {
 variable "arena" {
   default = "core"
 }
+
+variable "storage_encrypted_at_rest" {
+  default = false
+}
