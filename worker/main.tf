@@ -85,7 +85,7 @@ resource "aws_launch_configuration" "launch_config" {
     "${split(",",element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0))}",
   ]
 
-  user_data = "${data.template_file.user_data.rendered}"
+  user_data = "${data.template_file.user_data_cloudconfig.rendered}"
 
   root_block_device = {
     volume_size           = "${var.root_storage_size}"
@@ -211,7 +211,30 @@ EOF
   }
 }
 
-data "template_file" "user_data" {
+data "template_cloudinit_config" "user_data" {
+  gzip          = true
+  base64_encode = true
+
+  # Setup hello world script to be called by the cloud-config
+  part {
+    filename     = "nubis-metadata"
+    content_type = "text/cloud-config"
+    content      = "${data.template_file.user_data_cloudconfig.rendered}"
+  }
+}
+
+data "template_file" "user_data_cloudconfig" {
+  count    = "${var.enabled}"
+  template = "${file("${path.module}/templates/userdata_cloudconfig.tpl")}"
+
+  vars {
+    PAYLOAD  = "${base64encode(data.template_file.nubis_metadata.rendered)}"
+    # The nubis-metadata script looks here for it
+    LOCATION = "/var/cache/nubis/userdata"
+  }
+}
+
+data "template_file" "nubis_metadata" {
   count    = "${var.enabled}"
   template = "${file("${path.module}/templates/userdata.tpl")}"
 
