@@ -228,7 +228,8 @@ data "template_file" "user_data_cloudconfig" {
   template = "${file("${path.module}/templates/userdata_cloudconfig.tpl")}"
 
   vars {
-    PAYLOAD  = "${base64encode(data.template_file.nubis_metadata.rendered)}"
+    PAYLOAD = "${base64encode(data.template_file.nubis_metadata.rendered)}"
+
     # The nubis-metadata script looks here for it
     LOCATION = "/var/cache/nubis/userdata"
   }
