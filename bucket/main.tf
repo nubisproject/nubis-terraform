@@ -40,6 +40,45 @@ resource "aws_s3_bucket" "bucket" {
     index_document = "${var.website_index}"
   }
 
+  lifecycle_rule {
+    id      = "expiration"
+    enabled = "${var.expiration_days >= "0" ? true : false }"
+
+    expiration {
+      days = "${var.expiration_days}"
+    }
+  }
+
+  lifecycle_rule {
+    id      = "transition-onezone_ia"
+    enabled = "${lookup(var.transitions, "ONEZONE_IA", 0) >= "30" ? true : false }"
+
+    transition {
+      days          = "${lookup(var.transitions, "ONEZONE_IA", 0) >= "30" ? lookup(var.transitions, "ONEZONE_IA", 0) : 30 }"
+      storage_class = "ONEZONE_IA"
+    }
+  }
+
+  lifecycle_rule {
+    id      = "transition-standard_ia"
+    enabled = "${lookup(var.transitions, "STANDARD_IA", 0) >= "30" ? true : false }"
+
+    transition {
+      days          = "${lookup(var.transitions, "STANDARD_IA", 0) >= "30" ? lookup(var.transitions, "STANDARD_IA", 0) : 30 }"
+      storage_class = "STANDARD_IA"
+    }
+  }
+
+  lifecycle_rule {
+    id      = "transition-glacier"
+    enabled = "${lookup(var.transitions, "GLACIER", 0) == "0" ? false : true }"
+
+    transition {
+      days          = "${lookup(var.transitions, "GLACIER", 0)}"
+      storage_class = "GLACIER"
+    }
+  }
+
   server_side_encryption_configuration = "${local.server_side_encryption_configuration_enabled[signum(var.storage_encrypted_at_rest)]}"
 
   tags = {
