@@ -242,8 +242,8 @@ resource "aws_db_instance" "replica" {
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
 
-  apply_immediately    = true
-  skip_final_snapshot  = true
+  apply_immediately   = true
+  skip_final_snapshot = true
 
   tags {
     Region         = "${var.region}"
