@@ -1,3 +1,64 @@
+locals {
+  # Default TCP client port
+  client_port = {
+    mysql    = "3306"
+    postgres = "5432"
+  }
+
+  # We need to know Amazon's defaults, unfortunately
+  engine_version_defaults = {
+    mysql    = "5.6"
+    postgres = "9.6"
+  }
+
+  # Settle on which version to request
+  engine_version = "${coalesce(var.engine_version, local.engine_version_defaults[var.engine])}"
+
+  # just remove '.' from there, not allowed in names
+  engine_version_clean = "${replace(local.engine_version, ".", "-")}"
+
+  # Grab only the first 2 version components
+  engine_version_family = "${join(".", slice(split(".", local.engine_version), 0, 2))}"
+
+  default_parameters = {
+    mysql = [
+      {
+        name         = "max_allowed_packet"
+        value        = "1073741824"
+        apply_method = "immediate"
+      },
+      {
+        name         = "slow_query_log"
+        value        = "1"
+        apply_method = "immediate"
+      },
+    ]
+
+    postgres = [
+      {
+        name         = "autovacuum"
+        value        = 1
+        apply_method = "immediate"
+      },
+      {
+        name         = "log_min_duration_statement"
+        value        = 250
+        apply_method = "immediate"
+      },
+      {
+        name         = "log_statement"
+        value        = "none"
+        apply_method = "immediate"
+      },
+      {
+        name         = "log_duration"
+        value        = 0
+        apply_method = "immediate"
+      },
+    ]
+  }
+}
+
 module "info" {
   source      = "../info"
   region      = "${var.region}"
@@ -44,7 +105,7 @@ module "monitor" {
   account      = "${var.account}"
   service_name = "${var.service_name}"
   ami          = "${module.monitor-image.image_id}"
-  purpose      = "db-monitor"
+  purpose      = "db-monitor-${var.engine}"
 
   nubis_sudo_groups = "${var.nubis_sudo_groups}"
   nubis_user_groups = "${var.nubis_user_groups}"
@@ -66,8 +127,8 @@ resource "aws_security_group" "database" {
   }
 
   ingress {
-    from_port = 3306
-    to_port   = 3306
+    from_port = "${local.client_port[var.engine]}"
+    to_port   = "${local.client_port[var.engine]}"
     protocol  = "tcp"
 
     cidr_blocks = [
@@ -116,12 +177,36 @@ resource "aws_db_subnet_group" "database" {
   }
 }
 
+resource "aws_db_parameter_group" "pg" {
+  count  = "${signum(length(var.parameter_group_name)) == 0 ? 1 : 0}"
+  name   = "${var.engine}-${local.engine_version_clean}-${var.service_name}-${var.environment}-${var.name}"
+  family = "${var.engine}${local.engine_version_family}"
+
+  tags {
+    Region         = "${var.region}"
+    Environment    = "${var.environment}"
+    TechnicalOwner = "${var.technical_owner}"
+  }
+
+  parameter = [
+    "${concat(local.default_parameters[var.engine], var.parameters)}",
+  ]
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_db_instance" "database" {
   allocated_storage = "${var.allocated_storage}"
   engine            = "${var.engine}"
+  engine_version    = "${local.engine_version}"
   instance_class    = "${var.instance_class}"
 
   identifier = "${var.service_name}-${var.environment}"
+
+  allow_major_version_upgrade = true
+  auto_minor_version_upgrade  = true
 
   # Remove unsafe characters
   name     = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9_]/","")}"
@@ -135,13 +220,12 @@ resource "aws_db_instance" "database" {
   apply_immediately       = true
   storage_type            = "${var.storage_type}"
   db_subnet_group_name    = "${aws_db_subnet_group.database.name}"
-  parameter_group_name    = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
-
-  #  parameter_group_name = "default.mysql5.6"
+  parameter_group_name    = "${coalesce(var.parameter_group_name, join("",aws_db_parameter_group.pg.*.name))}"
 
   vpc_security_group_ids = [
     "${aws_security_group.database.id}",
   ]
+
   tags {
     Region         = "${var.region}"
     Environment    = "${var.environment}"
@@ -158,7 +242,6 @@ resource "aws_db_instance" "replica" {
   instance_class      = "${var.instance_class}"
   storage_type        = "${var.storage_type}"
 
-  parameter_group_name = "${coalesce(var.parameter_group_name, module.info.rds_mysql_parameter_group)}"
   apply_immediately    = true
   skip_final_snapshot  = true
 
@@ -207,6 +290,18 @@ resource "consul_keys" "database" {
   key {
     path   = "${module.consul.config_prefix}/Database/Password"
     value  = "${aws_db_instance.database.password}"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Database/Engine"
+    value  = "${aws_db_instance.database.engine}"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Database/Engine/VersionFamily"
+    value  = "${local.engine_version_family}"
     delete = true
   }
 }

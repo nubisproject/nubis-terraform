@@ -81,3 +81,12 @@ variable "nubis_sudo_groups" {
 variable "nubis_user_groups" {
   default = ""
 }
+
+variable "parameters" {
+  type    = "list"
+  default = []
+}
+
+variable "engine_version" {
+  default = ""
+}
