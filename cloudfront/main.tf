@@ -46,12 +46,12 @@ resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   }
 
   viewer_certificate {
-    acm_certificate_arn = "${acm_certificate.arn}"
+    acm_certificate_arn = "${aws_acm_certificate.acm_tf.arn}"
     ssl_support_method  = "sni-only"
   }
 }
 
-data "aws_acm_certificate" "acm_certificate" {
+data "aws_acm_certificate" "acm_tf" {
   domain   = "${var.acm_certificate_domain}"
   statuses = ["ISSUED"]
 }
