@@ -4,7 +4,7 @@ variable "region" {}
 
 variable "environment" {}
 
-variable "load_balancer_name" {}
+variable "load_balancer_web" {}
 
 variable "service_name" {
   default = "nubis"

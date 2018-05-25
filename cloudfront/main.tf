@@ -11,7 +11,7 @@ provider "aws" {
 
 resource "aws_cloudfront_distribution" "cloudfront_distribution" {
   origin {
-    domain_name = "${var.load_balancer_name}"
+    domain_name = "${var.load_balancer_web}"
     origin_id   = "${var.service_name}-${var.environment}"
   }
 
