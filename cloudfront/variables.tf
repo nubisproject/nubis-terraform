@@ -14,7 +14,8 @@ variable "technical_owner" {
   default = "infra-aws@mozilla.com"
 }
 
-variable "acm_ssl_cert_arn" {
+# Provide the CN of the ACM certificate
+variable "acm_certificate_domain" {
   default = ""
 }
 
