@@ -22,10 +22,6 @@ provider "consul" {
   datacenter = "${module.consul.datacenter}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 module "monitor-image" {
   source = "../images"
 

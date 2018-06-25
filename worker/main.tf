@@ -5,10 +5,6 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 module "userdata" {
   source            = "./userdata"
   region            = "${var.region}"

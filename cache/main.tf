@@ -5,10 +5,6 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 resource "aws_elasticache_cluster" "cache" {
   cluster_id        = "${var.service_name}-${var.environment}"
   engine            = "memcached"
