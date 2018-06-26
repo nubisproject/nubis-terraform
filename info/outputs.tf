@@ -77,3 +77,11 @@ output "private_network_cidr" {
 output "public_network_cidr" {
   value = "${data.terraform_remote_state.info.public_network_cidr}"
 }
+
+output "nubis_domain" {
+  value = "${data.terraform_remote_state.info.nubis_domain}"
+}
+
+output "master_zone_id" {
+  value = "${data.terraform_remote_state.info.master_zone_id}"
+}
