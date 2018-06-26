@@ -5,10 +5,6 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 resource "aws_route53_record" "primary" {
   count   = "${1 - ( var.ipv4_alias * var.ipv6_alias )}"
   zone_id = "${module.info.hosted_zone_id}"

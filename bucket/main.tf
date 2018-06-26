@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "${var.region}"
-}
-
 # Nasty workaround for nested optionnal block
 # Works, but edit carefully, if at all.
 locals {

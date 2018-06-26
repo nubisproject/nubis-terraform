@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "${var.region}"
-}
-
 data "terraform_remote_state" "info" {
   backend = "http"
 
