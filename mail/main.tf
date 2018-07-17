@@ -5,10 +5,6 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 resource "aws_iam_access_key" "email" {
   user = "${aws_iam_user.email.name}"
 }

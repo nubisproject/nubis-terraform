@@ -30,3 +30,21 @@ variable "acl" {
 variable "arena" {
   default = "core"
 }
+
+variable "storage_encrypted_at_rest" {
+  default = false
+}
+
+variable "expiration_days" {
+  default = "0"
+}
+
+variable "transitions" {
+  type = "map"
+
+  default = {
+    STANDARD_IA = 0
+    ONEZONE_IA  = 0
+    GLACIER     = 0
+  }
+}

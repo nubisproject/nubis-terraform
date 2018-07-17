@@ -5,10 +5,6 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 resource "aws_security_group" "load_balancer" {
   name_prefix = "${var.service_name}-${var.environment}-"
 

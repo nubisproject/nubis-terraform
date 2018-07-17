@@ -5,8 +5,19 @@ module "info" {
   account     = "${var.account}"
 }
 
-provider "aws" {
-  region = "${var.region}"
+module "userdata" {
+  source            = "./userdata"
+  region            = "${var.region}"
+  service_name      = "${var.service_name}"
+  environment       = "${var.environment}"
+  account           = "${var.account}"
+  purpose           = "${var.purpose}"
+  consul_token      = "${var.consul_token}"
+  nubis_domain      = "${var.nubis_domain}"
+  arena             = "${var.arena}"
+  nubis_sudo_groups = "${var.nubis_sudo_groups}"
+  nubis_user_groups = "${var.nubis_user_groups}"
+  swap_size_meg     = "${var.swap_size_meg}"
 }
 
 resource "aws_security_group" "extra" {
@@ -85,7 +96,7 @@ resource "aws_launch_configuration" "launch_config" {
     "${split(",",element(compact(concat(list(var.security_group), aws_security_group.extra.*.id)), 0))}",
   ]
 
-  user_data = "${data.template_file.user_data.rendered}"
+  user_data = "${module.userdata.cloudconfig}"
 
   root_block_device = {
     volume_size           = "${var.root_storage_size}"
@@ -208,25 +219,6 @@ EOF
 
   lifecycle {
     create_before_destroy = true
-  }
-}
-
-data "template_file" "user_data" {
-  count    = "${var.enabled}"
-  template = "${file("${path.module}/templates/userdata.tpl")}"
-
-  vars {
-    NUBIS_PROJECT       = "${var.service_name}"
-    CONSUL_ACL_TOKEN    = "${var.consul_token}"
-    NUBIS_PURPOSE       = "${var.purpose}"
-    NUBIS_ENVIRONMENT   = "${var.environment}"
-    NUBIS_ARENA         = "${var.arena}"
-    NUBIS_DOMAIN        = "${var.nubis_domain}"
-    NUBIS_ACCOUNT       = "${var.account}"
-    NUBIS_STACK         = "${var.service_name}-${var.environment}"
-    NUBIS_SUDO_GROUPS   = "${var.nubis_sudo_groups}"
-    NUBIS_USER_GROUPS   = "${var.nubis_user_groups}"
-    NUBIS_SWAP_SIZE_MEG = "${var.swap_size_meg}"
   }
 }
 

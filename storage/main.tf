@@ -21,10 +21,6 @@ provider "consul" {
   datacenter = "${module.consul.datacenter}"
 }
 
-provider "aws" {
-  region = "${var.region}"
-}
-
 resource "aws_efs_file_system" "storage" {
   tags = {
     Name           = "${var.service_name}-${var.environment}-storage"
