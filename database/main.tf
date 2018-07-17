@@ -20,6 +20,9 @@ locals {
   # Grab only the first 2 version components
   engine_version_family = "${join(".", slice(split(".", local.engine_version), 0, 2))}"
 
+  # Sanitize database name
+  database_name = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9_]/","")}"
+
   default_parameters = {
     mysql = [
       {
@@ -175,7 +178,7 @@ resource "aws_db_subnet_group" "database" {
 
 resource "aws_db_parameter_group" "pg" {
   count  = "${signum(length(var.parameter_group_name)) == 0 ? 1 : 0}"
-  name   = "${var.engine}-${local.engine_version_clean}-${var.service_name}-${var.environment}-${var.name}"
+  name   = "${var.engine}-${local.engine_version_clean}-${var.service_name}-${var.environment}-${local.database_name}"
   family = "${var.engine}${local.engine_version_family}"
 
   tags {
@@ -205,7 +208,7 @@ resource "aws_db_instance" "database" {
   auto_minor_version_upgrade  = true
 
   # Remove unsafe characters
-  name     = "${replace(coalesce(var.name, var.service_name), "/[^a-zA-Z0-9_]/","")}"
+  name     = "${local.database_name}"
   multi_az = "${var.multi_az}"
 
   username = "${var.username}"
