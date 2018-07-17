@@ -1,14 +1,41 @@
 # Change Log
 
-## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-11)
-[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.2.0)
+## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-17)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.3.0)
+
+**Closed issues:**
+
+- \[database\] aws\_db\_parameter\_group.pg: parameter group "name" cannot end with a hyphen [\#213](https://github.com/nubisproject/nubis-terraform/issues/213)
+- \[bucket\] Expose hosted\_zone\_id as output [\#211](https://github.com/nubisproject/nubis-terraform/issues/211)
+- Stop pinning image module to 0.1 [\#205](https://github.com/nubisproject/nubis-terraform/issues/205)
+- \[Terraform\] 0.11 Move providers out of modules [\#201](https://github.com/nubisproject/nubis-terraform/issues/201)
+- \[database\] Add PostgreSQL support [\#199](https://github.com/nubisproject/nubis-terraform/issues/199)
+- \[worker\] Move user-data generation to a sub-module [\#196](https://github.com/nubisproject/nubis-terraform/issues/196)
+- Use cloud-init to inject instance metadata to be future-proof [\#194](https://github.com/nubisproject/nubis-terraform/issues/194)
+- \[bucket\] Enable configuration of lifecycle hooks [\#192](https://github.com/nubisproject/nubis-terraform/issues/192)
+- \[bucket\] Support at rest-encryption [\#188](https://github.com/nubisproject/nubis-terraform/issues/188)
+- \[bucket\] We don't need account info [\#186](https://github.com/nubisproject/nubis-terraform/issues/186)
+- Prepare of terraform 0.11.x [\#162](https://github.com/nubisproject/nubis-terraform/issues/162)
 
 **Merged pull requests:**
 
-- fix typo [\#182](https://github.com/nubisproject/nubis-terraform/pull/182) ([gozer](https://github.com/gozer))
-- \[worker\] Slience some TF 0.11 warnings [\#181](https://github.com/nubisproject/nubis-terraform/pull/181) ([gozer](https://github.com/gozer))
+- Make sure we use the fully sanitized DB name in the PG group name [\#214](https://github.com/nubisproject/nubis-terraform/pull/214) ([gozer](https://github.com/gozer))
+- Expose the bucket Route 53 Hosted Zone ID as hosted\_zone\_id [\#212](https://github.com/nubisproject/nubis-terraform/pull/212) ([gozer](https://github.com/gozer))
+- Don't configure AWS providers \*inside\* modules anymore [\#210](https://github.com/nubisproject/nubis-terraform/pull/210) ([gozer](https://github.com/gozer))
+- corrects module count implementation and improves outputs [\#208](https://github.com/nubisproject/nubis-terraform/pull/208) ([danielhartnell](https://github.com/danielhartnell))
+- Remove image module pin [\#206](https://github.com/nubisproject/nubis-terraform/pull/206) ([limed](https://github.com/limed))
+- Added new public state outputs [\#204](https://github.com/nubisproject/nubis-terraform/pull/204) ([limed](https://github.com/limed))
+- Creates a new nubis-terraform module to provide CloudFront support [\#202](https://github.com/nubisproject/nubis-terraform/pull/202) ([danielhartnell](https://github.com/danielhartnell))
+- Add PostgreSQL support [\#200](https://github.com/nubisproject/nubis-terraform/pull/200) ([gozer](https://github.com/gozer))
+- Fix YAML indent [\#198](https://github.com/nubisproject/nubis-terraform/pull/198) ([gozer](https://github.com/gozer))
+- Move userdata generation to a sub-module [\#197](https://github.com/nubisproject/nubis-terraform/pull/197) ([gozer](https://github.com/gozer))
+- Create a multipart cloud-init block for nubis-metadata [\#195](https://github.com/nubisproject/nubis-terraform/pull/195) ([gozer](https://github.com/gozer))
+- \[bucket\] Allow specifying expiration rules and transitions [\#193](https://github.com/nubisproject/nubis-terraform/pull/193) ([gozer](https://github.com/gozer))
+- Don't harcode nubis.allizom.org [\#191](https://github.com/nubisproject/nubis-terraform/pull/191) ([limed](https://github.com/limed))
+- \[bucket\] Add encrypt at rest option storage\_encrypted\_at\_rest [\#189](https://github.com/nubisproject/nubis-terraform/pull/189) ([gozer](https://github.com/gozer))
+- We don't need account-info for buckets, so don't use it [\#187](https://github.com/nubisproject/nubis-terraform/pull/187) ([gozer](https://github.com/gozer))
 
-## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-10)
+## [v2.2.0](https://github.com/nubisproject/nubis-terraform/tree/v2.2.0) (2018-04-11)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.1.0...v2.2.0)
 
 **Closed issues:**
@@ -19,11 +46,16 @@
 - \[worker\] Allow specifying AZs [\#160](https://github.com/nubisproject/nubis-terraform/issues/160)
 - \[worker\] Add tunable for root volume type [\#159](https://github.com/nubisproject/nubis-terraform/issues/159)
 - \[worker\] Expose tunable for swap size [\#157](https://github.com/nubisproject/nubis-terraform/issues/157)
+- Tag v2.2.0 release [\#183](https://github.com/nubisproject/nubis-terraform/issues/183)
 - Tag v2.2.0 release [\#177](https://github.com/nubisproject/nubis-terraform/issues/177)
 - Tag v2.2.0 release [\#171](https://github.com/nubisproject/nubis-terraform/issues/171)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#185](https://github.com/nubisproject/nubis-terraform/pull/185) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.2.0 release \[skip ci\] [\#184](https://github.com/nubisproject/nubis-terraform/pull/184) ([nubis-automation](https://github.com/nubis-automation))
+- fix typo [\#182](https://github.com/nubisproject/nubis-terraform/pull/182) ([gozer](https://github.com/gozer))
+- \[worker\] Slience some TF 0.11 warnings [\#181](https://github.com/nubisproject/nubis-terraform/pull/181) ([gozer](https://github.com/gozer))
 - Update CHANGELOG for v2.2.0 release \[skip ci\] [\#179](https://github.com/nubisproject/nubis-terraform/pull/179) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.2.0 release \[skip ci\] [\#178](https://github.com/nubisproject/nubis-terraform/pull/178) ([nubis-automation](https://github.com/nubis-automation))
 - Update to use image\_version [\#176](https://github.com/nubisproject/nubis-terraform/pull/176) ([gozer](https://github.com/gozer))
