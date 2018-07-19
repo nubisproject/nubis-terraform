@@ -16,9 +16,12 @@
 - \[bucket\] Support at rest-encryption [\#188](https://github.com/nubisproject/nubis-terraform/issues/188)
 - \[bucket\] We don't need account info [\#186](https://github.com/nubisproject/nubis-terraform/issues/186)
 - Prepare of terraform 0.11.x [\#162](https://github.com/nubisproject/nubis-terraform/issues/162)
+- Tag v2.3.0 release [\#215](https://github.com/nubisproject/nubis-terraform/issues/215)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#217](https://github.com/nubisproject/nubis-terraform/pull/217) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#216](https://github.com/nubisproject/nubis-terraform/pull/216) ([nubis-automation](https://github.com/nubis-automation))
 - Make sure we use the fully sanitized DB name in the PG group name [\#214](https://github.com/nubisproject/nubis-terraform/pull/214) ([gozer](https://github.com/gozer))
 - Expose the bucket Route 53 Hosted Zone ID as hosted\_zone\_id [\#212](https://github.com/nubisproject/nubis-terraform/pull/212) ([gozer](https://github.com/gozer))
 - Don't configure AWS providers \*inside\* modules anymore [\#210](https://github.com/nubisproject/nubis-terraform/pull/210) ([gozer](https://github.com/gozer))
