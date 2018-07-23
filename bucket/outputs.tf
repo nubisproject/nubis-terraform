@@ -1,15 +1,15 @@
 output "name" {
-  value = "${aws_s3_bucket.bucket.id}"
+  value = "${element(concat(aws_s3_bucket.bucket.*.id, list("")), 0)}"
 }
 
 output "arn" {
-  value = "${aws_s3_bucket.bucket.arn}"
+  value = "${element(concat(aws_s3_bucket.bucket.*.arn, list("")), 0)}"
 }
 
 output "website_endpoint" {
-  value = "${aws_s3_bucket.bucket.website_endpoint}"
+  value = "${element(concat(aws_s3_bucket.bucket.*.website_endpoint, list("")), 0)}"
 }
 
 output "hosted_zone_id" {
-  value = "${aws_s3_bucket.bucket.hosted_zone_id}"
+  value = "${element(concat(aws_s3_bucket.bucket.*.hosted_zone_id, list("")), 0)}"
 }
