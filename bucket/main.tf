@@ -20,7 +20,7 @@ locals {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  count  = "${var.enabled}"
+  count = "${var.enabled}"
 
   # Bucket can't be more than 63 characters long, so truncate away randomness
   bucket = "${replace(data.template_file.random.rendered,"/^(.{63}).*/","$1")}"
