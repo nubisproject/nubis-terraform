@@ -1,4 +1,5 @@
 data "terraform_remote_state" "info" {
+  count   = "${var.enabled}"
   backend = "http"
 
   config {
