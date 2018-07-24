@@ -1,13 +1,6 @@
 # Change Log
 
 ## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-23)
-[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.3.0...v2.3.0)
-
-**Merged pull requests:**
-
-- Convert outputs to splats [\#225](https://github.com/nubisproject/nubis-terraform/pull/225) ([tinnightcap](https://github.com/tinnightcap))
-
-## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-23)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
@@ -24,12 +17,16 @@
 - \[bucket\] We don't need account info [\#186](https://github.com/nubisproject/nubis-terraform/issues/186)
 - Tag v2.2.0 release [\#183](https://github.com/nubisproject/nubis-terraform/issues/183)
 - Prepare of terraform 0.11.x [\#162](https://github.com/nubisproject/nubis-terraform/issues/162)
+- Tag v2.3.0 release [\#226](https://github.com/nubisproject/nubis-terraform/issues/226)
 - Tag v2.3.0 release [\#222](https://github.com/nubisproject/nubis-terraform/issues/222)
 - Tag v2.3.0 release [\#218](https://github.com/nubisproject/nubis-terraform/issues/218)
 - Tag v2.3.0 release [\#215](https://github.com/nubisproject/nubis-terraform/issues/215)
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#228](https://github.com/nubisproject/nubis-terraform/pull/228) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#227](https://github.com/nubisproject/nubis-terraform/pull/227) ([nubis-automation](https://github.com/nubis-automation))
+- Convert outputs to splats [\#225](https://github.com/nubisproject/nubis-terraform/pull/225) ([tinnightcap](https://github.com/tinnightcap))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#224](https://github.com/nubisproject/nubis-terraform/pull/224) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#223](https://github.com/nubisproject/nubis-terraform/pull/223) ([nubis-automation](https://github.com/nubis-automation))
 - Expose enables flags for two modules [\#221](https://github.com/nubisproject/nubis-terraform/pull/221) ([tinnightcap](https://github.com/tinnightcap))
