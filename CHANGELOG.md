@@ -1,6 +1,14 @@
 # Change Log
 
-## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-23)
+## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-27)
+[Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.3.0...v2.3.0)
+
+**Closed issues:**
+
+- Add new public state information [\#203](https://github.com/nubisproject/nubis-terraform/issues/203)
+- \[info\] Expose Arena [\#138](https://github.com/nubisproject/nubis-terraform/issues/138)
+
+## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-24)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
@@ -17,6 +25,7 @@
 - \[bucket\] We don't need account info [\#186](https://github.com/nubisproject/nubis-terraform/issues/186)
 - Tag v2.2.0 release [\#183](https://github.com/nubisproject/nubis-terraform/issues/183)
 - Prepare of terraform 0.11.x [\#162](https://github.com/nubisproject/nubis-terraform/issues/162)
+- Tag v2.3.0 release [\#229](https://github.com/nubisproject/nubis-terraform/issues/229)
 - Tag v2.3.0 release [\#226](https://github.com/nubisproject/nubis-terraform/issues/226)
 - Tag v2.3.0 release [\#222](https://github.com/nubisproject/nubis-terraform/issues/222)
 - Tag v2.3.0 release [\#218](https://github.com/nubisproject/nubis-terraform/issues/218)
@@ -24,6 +33,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#231](https://github.com/nubisproject/nubis-terraform/pull/231) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#230](https://github.com/nubisproject/nubis-terraform/pull/230) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#228](https://github.com/nubisproject/nubis-terraform/pull/228) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#227](https://github.com/nubisproject/nubis-terraform/pull/227) ([nubis-automation](https://github.com/nubis-automation))
 - Convert outputs to splats [\#225](https://github.com/nubisproject/nubis-terraform/pull/225) ([tinnightcap](https://github.com/tinnightcap))
