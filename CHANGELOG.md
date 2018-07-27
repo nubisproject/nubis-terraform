@@ -3,12 +3,11 @@
 ## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-27)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.3.0...v2.3.0)
 
-**Closed issues:**
+**Merged pull requests:**
 
-- Add new public state information [\#203](https://github.com/nubisproject/nubis-terraform/issues/203)
-- \[info\] Expose Arena [\#138](https://github.com/nubisproject/nubis-terraform/issues/138)
+- try and pin at account version [\#236](https://github.com/nubisproject/nubis-terraform/pull/236) ([gozer](https://github.com/gozer))
 
-## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-24)
+## [v2.3.0](https://github.com/nubisproject/nubis-terraform/tree/v2.3.0) (2018-07-27)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.2.0...v2.3.0)
 
 **Closed issues:**
@@ -16,6 +15,7 @@
 - \[database\] aws\_db\_parameter\_group.pg: parameter group "name" cannot end with a hyphen [\#213](https://github.com/nubisproject/nubis-terraform/issues/213)
 - \[bucket\] Expose hosted\_zone\_id as output [\#211](https://github.com/nubisproject/nubis-terraform/issues/211)
 - Stop pinning image module to 0.1 [\#205](https://github.com/nubisproject/nubis-terraform/issues/205)
+- Add new public state information [\#203](https://github.com/nubisproject/nubis-terraform/issues/203)
 - \[Terraform\] 0.11 Move providers out of modules [\#201](https://github.com/nubisproject/nubis-terraform/issues/201)
 - \[database\] Add PostgreSQL support [\#199](https://github.com/nubisproject/nubis-terraform/issues/199)
 - \[worker\] Move user-data generation to a sub-module [\#196](https://github.com/nubisproject/nubis-terraform/issues/196)
@@ -25,6 +25,8 @@
 - \[bucket\] We don't need account info [\#186](https://github.com/nubisproject/nubis-terraform/issues/186)
 - Tag v2.2.0 release [\#183](https://github.com/nubisproject/nubis-terraform/issues/183)
 - Prepare of terraform 0.11.x [\#162](https://github.com/nubisproject/nubis-terraform/issues/162)
+- \[info\] Expose Arena [\#138](https://github.com/nubisproject/nubis-terraform/issues/138)
+- Tag v2.3.0 release [\#232](https://github.com/nubisproject/nubis-terraform/issues/232)
 - Tag v2.3.0 release [\#229](https://github.com/nubisproject/nubis-terraform/issues/229)
 - Tag v2.3.0 release [\#226](https://github.com/nubisproject/nubis-terraform/issues/226)
 - Tag v2.3.0 release [\#222](https://github.com/nubisproject/nubis-terraform/issues/222)
@@ -33,6 +35,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#234](https://github.com/nubisproject/nubis-terraform/pull/234) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.3.0 release \[skip ci\] [\#233](https://github.com/nubisproject/nubis-terraform/pull/233) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#231](https://github.com/nubisproject/nubis-terraform/pull/231) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#230](https://github.com/nubisproject/nubis-terraform/pull/230) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.3.0 release \[skip ci\] [\#228](https://github.com/nubisproject/nubis-terraform/pull/228) ([nubis-automation](https://github.com/nubis-automation))
