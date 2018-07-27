@@ -93,7 +93,7 @@ module "monitor-image" {
   project = "nubis-db-admin"
 
   # Just pick latest since we don't really know for sure
-  image_version = "*"
+  image_version = "${module.info.nubis_version}"
 }
 
 module "monitor" {
