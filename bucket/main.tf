@@ -79,6 +79,8 @@ resource "aws_s3_bucket" "bucket" {
 
   server_side_encryption_configuration = "${local.server_side_encryption_configuration_enabled[signum(var.storage_encrypted_at_rest)]}"
 
+  cors_rule = "${var.cors_rules}"
+
   tags = {
     Name           = "${var.service_name}-${var.environment}-${var.purpose}"
     Region         = "${var.region}"
