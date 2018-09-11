@@ -53,3 +53,8 @@ variable "transitions" {
     GLACIER     = 0
   }
 }
+
+variable "cors_rules" {
+  type    = "list"
+  default = []
+}
