@@ -11,24 +11,27 @@ resource "aws_security_group" "load_balancer" {
   vpc_id = "${module.info.vpc_id}"
 
   ingress {
-    from_port   = "${var.port_http}"
-    to_port     = "${var.port_http}"
-    protocol    = "tcp"
-    cidr_blocks = "${var.whitelist_cidrs}"
+    from_port        = "${var.port_http}"
+    to_port          = "${var.port_http}"
+    protocol         = "tcp"
+    cidr_blocks      = "${var.whitelist_cidrs}"
+    ipv6_cidr_blocks = "${var.whitelist_ipv6_cidrs}"
   }
 
   ingress {
-    from_port   = "${var.port_https}"
-    to_port     = "${var.port_https}"
-    protocol    = "tcp"
-    cidr_blocks = "${var.whitelist_cidrs}"
+    from_port        = "${var.port_https}"
+    to_port          = "${var.port_https}"
+    protocol         = "tcp"
+    cidr_blocks      = "${var.whitelist_cidrs}"
+    ipv6_cidr_blocks = "${var.whitelist_ipv6_cidrs}"
   }
 
   egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {

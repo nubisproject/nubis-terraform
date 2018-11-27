@@ -84,3 +84,8 @@ variable "whitelist_cidrs" {
   type    = "list"
   default = ["0.0.0.0/0"]
 }
+
+variable "whitelist_ipv6_cidrs" {
+  type    = "list"
+  default = ["::/0"]
+}
