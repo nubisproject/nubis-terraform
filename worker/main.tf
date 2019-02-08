@@ -132,7 +132,7 @@ resource "aws_autoscaling_group" "asg" {
   name                 = "${var.service_name}-${var.environment}-${var.region}-${local.az_index_identifier}asg (${var.purpose}) (LC ${aws_launch_configuration.launch_config.id})"
   max_size             = "${coalesce(var.max_instances, 1 + (4*var.min_instances) )}"
   min_size             = "${var.min_instances}"
-  desired_instances    = "${var.desired_instances}"
+  desired_capacity     = "${var.desired_instances}"
   launch_configuration = "${aws_launch_configuration.launch_config.id}"
 
   health_check_grace_period = "${var.health_check_grace_period}"
