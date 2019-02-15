@@ -54,6 +54,10 @@ variable "max_instances" {
   default = ""
 }
 
+variable "desired_instances" {
+  default = ""
+}
+
 variable "security_group" {
   default = ""
 }
