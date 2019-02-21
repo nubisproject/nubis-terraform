@@ -5,11 +5,32 @@ module "info" {
   account     = "${var.account}"
 }
 
-resource "aws_elasticache_cluster" "cache" {
-  cluster_id        = "${var.service_name}-${var.environment}"
-  engine            = "memcached"
+resource "aws_elasticache_cluster" "memcache" {
+  count             = "${var.engine == "memcached" ? 1 : 0 }"
+  cluster_id        = "${var.service_name}-${var.environment}-${var.engine}"
+  engine            = "${var.engine}"
   node_type         = "${var.instance_type}"
-  port              = 11211
+  num_cache_nodes   = 1
+  apply_immediately = true
+  subnet_group_name = "${aws_elasticache_subnet_group.clients.name}"
+
+  security_group_ids = [
+    "${aws_security_group.clients.id}",
+  ]
+
+  tags = {
+    Name           = "${var.service_name}-${var.environment}"
+    Region         = "${var.region}"
+    Environment    = "${var.environment}"
+    TechnicalOwner = "${var.technical_owner}"
+  }
+}
+
+resource "aws_elasticache_cluster" "redis" {
+  count             = "${var.engine == "redis" ? 1 : 0 }"
+  cluster_id        = "${var.service_name}-${var.environment}-${var.engine}"
+  engine            = "${var.engine}"
+  node_type         = "${var.instance_type}"
   num_cache_nodes   = 1
   apply_immediately = true
   subnet_group_name = "${aws_elasticache_subnet_group.clients.name}"
@@ -39,8 +60,8 @@ resource "aws_security_group" "clients" {
   vpc_id = "${module.info.vpc_id}"
 
   ingress {
-    from_port = 11211
-    to_port   = 11211
+    from_port = "${var.engine == "memcached" ? "11211" : "6379"}"
+    to_port   = "${var.engine == "memcached" ? "11211" : "6379"}"
     protocol  = "tcp"
 
     security_groups = [

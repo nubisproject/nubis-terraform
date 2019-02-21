@@ -17,16 +17,42 @@ provider "consul" {
 # Publish our outputs into Consul for our application to consume
 resource "consul_keys" "config" {
   key {
-    name   = "cache_port"
+    path   = "${module.consul.config_prefix}/Cache/Engine"
+    value  = "${var.engine}"
+    delete = true
+  }
+}
+
+# Publish our outputs into Consul for our application to consume
+resource "consul_keys" "memcache" {
+  count = "${var.engine == "memcached" ? 1 : 0}"
+
+  key {
     path   = "${module.consul.config_prefix}/Cache/Port"
-    value  = "${element(split(":",aws_elasticache_cluster.cache.configuration_endpoint), 1)}"
+    value  = "${element(split(":",aws_elasticache_cluster.memcache.configuration_endpoint), 1)}"
     delete = true
   }
 
   key {
-    name   = "cache_endpoint"
     path   = "${module.consul.config_prefix}/Cache/Endpoint"
-    value  = "${element(split(":",aws_elasticache_cluster.cache.configuration_endpoint), 0)}"
+    value  = "${element(split(":",aws_elasticache_cluster.memcache.configuration_endpoint), 0)}"
+    delete = true
+  }
+}
+
+# Publish our outputs into Consul for our application to consume
+resource "consul_keys" "redis" {
+  count = "${var.engine == "redis" ? 1 : 0}"
+
+  key {
+    path   = "${module.consul.config_prefix}/Cache/Port"
+    value  = "6379"
+    delete = true
+  }
+
+  key {
+    path   = "${module.consul.config_prefix}/Cache/Endpoint"
+    value  = "${jsonencode(aws_elasticache_cluster.redis.*.cache_nodes)}"
     delete = true
   }
 }
