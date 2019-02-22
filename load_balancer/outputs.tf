@@ -2,6 +2,10 @@ output "address" {
   value = "${aws_elb.load_balancer.dns_name}"
 }
 
+output "dualstack_address" {
+  value = "dualstack.${aws_elb.load_balancer.dns_name}"
+}
+
 output "ipv4_address" {
   value = "${aws_elb.load_balancer.dns_name}"
 }

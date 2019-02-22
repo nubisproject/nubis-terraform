@@ -21,3 +21,7 @@ variable "client_security_groups" {
 variable "arena" {
   default = "core"
 }
+
+variable "engine" {
+  default = "memcached"
+}
