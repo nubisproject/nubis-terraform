@@ -5,13 +5,14 @@
 
 **Closed issues:**
 
-- Tag v2.4.0 release [\#259](https://github.com/nubisproject/nubis-terraform/issues/259)
+- Tag v2.4.0 release [\#262](https://github.com/nubisproject/nubis-terraform/issues/262)
 
 ## [v2.4.0](https://github.com/nubisproject/nubis-terraform/tree/v2.4.0) (2019-02-22)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.3.1...v2.4.0)
 
 **Closed issues:**
 
+- Tag v2.4.0 release [\#259](https://github.com/nubisproject/nubis-terraform/issues/259)
 - \[cache\] Add Redis backend [\#257](https://github.com/nubisproject/nubis-terraform/issues/257)
 - \[worker\] Allow specifying desired\_instances [\#254](https://github.com/nubisproject/nubis-terraform/issues/254)
 - \[load\_balancer\] Allow whitelisting [\#251](https://github.com/nubisproject/nubis-terraform/issues/251)
@@ -20,6 +21,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#264](https://github.com/nubisproject/nubis-terraform/pull/264) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#263](https://github.com/nubisproject/nubis-terraform/pull/263) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#261](https://github.com/nubisproject/nubis-terraform/pull/261) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#260](https://github.com/nubisproject/nubis-terraform/pull/260) ([nubis-automation](https://github.com/nubis-automation))
 - \[cache\] Add configurable engine [\#258](https://github.com/nubisproject/nubis-terraform/pull/258) ([gozer](https://github.com/gozer))
