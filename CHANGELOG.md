@@ -1,17 +1,18 @@
 # Change Log
 
-## [v2.4.0](https://github.com/nubisproject/nubis-terraform/tree/v2.4.0) (2019-02-23)
+## [v2.4.0](https://github.com/nubisproject/nubis-terraform/tree/v2.4.0) (2019-03-05)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.4.0...v2.4.0)
 
 **Closed issues:**
 
-- Tag v2.4.0 release [\#274](https://github.com/nubisproject/nubis-terraform/issues/274)
+- Tag v2.4.0 release [\#277](https://github.com/nubisproject/nubis-terraform/issues/277)
 
 ## [v2.4.0](https://github.com/nubisproject/nubis-terraform/tree/v2.4.0) (2019-02-23)
 [Full Changelog](https://github.com/nubisproject/nubis-terraform/compare/v2.3.1...v2.4.0)
 
 **Closed issues:**
 
+- Tag v2.4.0 release [\#274](https://github.com/nubisproject/nubis-terraform/issues/274)
 - Tag v2.4.0 release [\#271](https://github.com/nubisproject/nubis-terraform/issues/271)
 - Tag v2.4.0 release [\#268](https://github.com/nubisproject/nubis-terraform/issues/268)
 - Tag v2.4.0 release [\#265](https://github.com/nubisproject/nubis-terraform/issues/265)
@@ -25,6 +26,8 @@
 
 **Merged pull requests:**
 
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#279](https://github.com/nubisproject/nubis-terraform/pull/279) ([nubis-automation](https://github.com/nubis-automation))
+- Update CHANGELOG for v2.4.0 release \[skip ci\] [\#278](https://github.com/nubisproject/nubis-terraform/pull/278) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#276](https://github.com/nubisproject/nubis-terraform/pull/276) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#275](https://github.com/nubisproject/nubis-terraform/pull/275) ([nubis-automation](https://github.com/nubis-automation))
 - Update CHANGELOG for v2.4.0 release \[skip ci\] [\#273](https://github.com/nubisproject/nubis-terraform/pull/273) ([nubis-automation](https://github.com/nubis-automation))
