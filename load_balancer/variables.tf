@@ -36,6 +36,10 @@ variable "ssl_cert_name_prefix" {
   default = ""
 }
 
+variable "ssl_cert_arn" {
+  default = ""
+}
+
 variable "no_ssl_cert" {
   default = "0"
 }
