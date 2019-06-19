@@ -50,11 +50,12 @@ resource "aws_security_group" "load_balancer" {
 
 data "template_file" "ssl_cert_id" {
   # Last item is empty on purpose, for no_ssl_cert
-  template = "$${ONE},$${TWO},"
+  template = "$${ONE},$${TWO},$${THREE},"
 
   vars = {
-    ONE = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.region}.${var.account}.${var.nubis_domain}"
-    TWO = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.ssl_cert_name_prefix}-${var.environment}"
+    ONE   = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.region}.${var.account}.${var.nubis_domain}"
+    TWO   = "arn:aws:iam::${module.info.account_id}:server-certificate/${var.ssl_cert_name_prefix}-${var.environment}"
+    THREE = "${var.ssl_cert_arn}"
   }
 }
 
@@ -84,7 +85,7 @@ resource "aws_elb" "load_balancer" {
     instance_protocol  = "${var.backend_protocol}"
     lb_port            = "${var.port_https}"
     lb_protocol        = "${var.protocol_https}"
-    ssl_certificate_id = "${element(split(",",data.template_file.ssl_cert_id.rendered),  ( signum(length(var.ssl_cert_name_prefix)) * ( 1 - signum(var.no_ssl_cert) ) ) + ( 2 * signum(var.no_ssl_cert) )  )}"
+    ssl_certificate_id = "${element(split(",",data.template_file.ssl_cert_id.rendered),  ( signum(length(var.ssl_cert_name_prefix)) * ( 1 - signum(var.no_ssl_cert) ) ) + ( 2 * signum(length(var.ssl_cert_arn)) ) +( 3 * signum(var.no_ssl_cert) )  )}"
   }
 
   health_check {
