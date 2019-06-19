@@ -85,7 +85,7 @@ resource "aws_elb" "load_balancer" {
     instance_protocol  = "${var.backend_protocol}"
     lb_port            = "${var.port_https}"
     lb_protocol        = "${var.protocol_https}"
-    ssl_certificate_id = "${element(split(",",data.template_file.ssl_cert_id.rendered),  ( signum(length(var.ssl_cert_name_prefix)) * ( 1 - signum(var.no_ssl_cert) ) ) + ( 2 * signum(length(var.ssl_cert_arn)) ) +( 3 * signum(var.no_ssl_cert) )  )}"
+    ssl_certificate_id = "${element(split(",",data.template_file.ssl_cert_id.rendered),  ( signum(length(var.ssl_cert_name_prefix)) * ( 1 - signum(var.no_ssl_cert) ) ) + ( 2 * signum(length(var.ssl_cert_arn)) * ( 1 - signum(var.no_ssl_cert) ) ) +( 3 * signum(var.no_ssl_cert) )  )}"
   }
 
   health_check {
